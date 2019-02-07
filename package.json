@@ -7,7 +7,13 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build:lib": "ng build loadable",
+    "npm_pack": "cd dist/loadable && npm pack",
+    "copy-license": "cpy .\\LICENSE .\\dist\\loadable",
+    "copy-readme": "cpy .\\README.md .\\dist\\loadable",
+    "copy-files": "npm run copy-license && npm run copy-readme",
+    "package": "npm run build:lib && npm run copy-files && npm run npm_pack"
   },
   "private": true,
   "dependencies": {
@@ -20,17 +26,20 @@
     "@angular/platform-browser-dynamic": "~7.2.0-rc.0",
     "@angular/router": "~7.2.0-rc.0",
     "core-js": "^2.5.4",
+    "cpy-cli": "^2.0.0",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "~0.13.0",
+    "@angular-devkit/build-ng-packagr": "~0.13.0",
     "@angular/cli": "~7.3.0-rc.0",
     "@angular/compiler-cli": "~7.2.0-rc.0",
     "@angular/language-service": "~7.2.0-rc.0",
-    "@types/node": "~8.9.4",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "~8.9.4",
     "codelyzer": "~4.5.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
@@ -39,8 +48,11 @@
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "ng-packagr": "^4.2.0",
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
+    "tsickle": ">=0.34.0",
+    "tslib": "^1.9.0",
     "tslint": "~5.11.0",
     "typescript": "~3.2.2"
   }

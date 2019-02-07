@@ -17,6 +17,21 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ngx-loadable": [
+        "dist/ngx-loadable"
+      ],
+      "ngx-loadable/*": [
+        "dist/ngx-loadable/*"
+      ],
+      "loadable": [
+        "dist/loadable"
+      ],
+      "loadable/*": [
+        "dist/loadable/*"
+      ]
+    },
+    "downlevelIteration": true
   }
 }
