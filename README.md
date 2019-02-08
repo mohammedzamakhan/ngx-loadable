@@ -1,27 +1,54 @@
-# NgxLoadable
+# ngx-loadable
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.0-rc.0.
+[![license](https://img.shields.io/github/license/mohammedzamakhan/ngx-loadable.svg)](https://github.com/mohammedzamakhan/ngx-loadable/blob/master/LICENSE)
 
-## Development server
+> ngx-loadable
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Table of Contents
+- [Problem](#problem)
+- [Solution](#solution)
+- [Install](#install)
+- [Usage](#usage)
+- [Contribute](#contribute)
+- [License](#license)
 
-## Code scaffolding
+## Problem
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Angular provides an easy way for adding route based lazy loading modules. But in most of the projects, each route tends to have a lot of different components. It could be because of lots of modals, tabs, and components that appear based on user interaction in a single route.
 
-## Build
+## Solution
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+The `ngx-loadable` wraps the complex implementation for lazy loading non routable modules in a simple API. It provides a Directive and a Component to lazy load modules. A directive can be used for simple lazy loading modules, but if you want more control over the loading of lazy loading modules, by prefetching, then prefer using component.
 
-## Running unit tests
+## Install
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Install and manage the ngx-loadable using NPM. You may use `yarn` or `npm`.
 
-## Running end-to-end tests
+`npm install ngx-loadable --save`
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+or
 
-## Further help
+`yarn add ngx-loadable`
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Usage
+
+### NgModule
+Import the LoadableModule in the NgModule and declare them in the "imports", you can also use the `forRoot()` for `forChild()` function.
+
+``` ts
+import { LoadableModule } from 'ngx-loadable';
+
+@NgModule({
+  imports: [
+    LoadableModule
+  ]
+})
+```
+
+## Contribute
+
+Please contribute by creating issues/PRs
+
+## License
+
+[© 2019 ngx-loadable. All Rights Reserved.](../LICENSE)

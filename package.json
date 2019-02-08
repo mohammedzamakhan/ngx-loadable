@@ -10,8 +10,8 @@
     "e2e": "ng e2e",
     "build:lib": "ng build loadable",
     "npm_pack": "cd dist/loadable && npm pack",
-    "copy-license": "cpy .\\LICENSE .\\dist\\loadable",
-    "copy-readme": "cpy .\\README.md .\\dist\\loadable",
+    "copy-license": "cpy 'LICENSE' dist/loadable",
+    "copy-readme": "cpy 'README.md' dist/loadable",
     "copy-files": "npm run copy-license && npm run copy-readme",
     "package": "npm run build:lib && npm run copy-files && npm run npm_pack"
   },
