@@ -8,6 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "docs": "ng build --prod --project demo --base-href '/ngx-loadable/'",
     "build:lib": "ng build loadable",
     "npm_pack": "cd dist/loadable && npm pack",
     "copy-license": "cpy 'LICENSE' dist/loadable",
