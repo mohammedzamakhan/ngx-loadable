@@ -2,7 +2,8 @@
 
 [![license](https://img.shields.io/github/license/mohammedzamakhan/ngx-loadable.svg)](https://github.com/mohammedzamakhan/ngx-loadable/blob/master/LICENSE)
 
-> ngx-loadable
+![ngx-loadable logo](https://cdn-images-1.medium.com/max/1600/1*D-rdCEVxbkbGOVdrA3v4bA.png)
+*The library logo represents faster application like speed of wind*
 
 ## Table of Contents
 - [Problem](#problem)
