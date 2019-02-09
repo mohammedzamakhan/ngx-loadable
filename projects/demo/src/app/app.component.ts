@@ -10,6 +10,7 @@ import { LazyModule } from './lazy/lazy.module';
 export class AppComponent {
   title = 'demo';
   show = false;
+  showLazyBoy = false;
   manuallyLoaded = false;
   @ViewChild('lazyModule') lazyModule: LoadableComponent;
 
@@ -22,6 +23,7 @@ export class AppComponent {
   }
 
   load() {
-    this.loadableService.preload('lazy');
+    this.loadableService.preload('lazy')
+      .then(() => this.manuallyLoaded = true);
   }
 }
