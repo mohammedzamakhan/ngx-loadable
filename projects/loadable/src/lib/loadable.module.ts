@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { LOADABLE_CONFIG, LoadableService } from './loadable.service';
 import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { LoadableDirective } from './loadable.directive';
+import { ILoadableConfig } from './loadable.config';
 
 @NgModule({
   declarations: [LoadableComponent, LoadableDirective],
@@ -16,7 +17,7 @@ import { LoadableDirective } from './loadable.directive';
   exports: [LoadableComponent, LoadableDirective]
 })
 export class LoadableModule {
-  static forRoot(config): ModuleWithProviders  {
+  static forRoot(config: ILoadableConfig = {}): ModuleWithProviders  {
     return {
       ngModule: LoadableModule,
       providers: [
@@ -27,7 +28,7 @@ export class LoadableModule {
     };
   }
 
-  static forChild(config: any = {}): ModuleWithProviders {
+  static forChild(config: ILoadableConfig = {}): ModuleWithProviders {
     return {
       ngModule: LoadableModule,
       providers: [
@@ -38,7 +39,7 @@ export class LoadableModule {
 
   constructor(
     configService: LoadableService,
-    @Optional() @Inject(LOADABLE_CONFIG) configs: any[] = [],
+    @Optional() @Inject(LOADABLE_CONFIG) configs: ILoadableConfig[] = [],
   ) {
     if (!configs) {
       return;

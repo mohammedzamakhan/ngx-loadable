@@ -1,20 +1,80 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<section class="hero">
+  <div class="hero-body">
+    <div class="container" style="display: flex;">
+      <div style="flex: 1">
+        <h1 class="title">
+          ngx-loadable
+        </h1>
+        <h2 class="subtitle">
+          Making Code Splitting your non routable Angular Modules, a piece of
+          cake 🍰!
+        </h2>
+      </div>
+      <div>
+        <img
+          width="75px"
+          src="https://cdn-images-1.medium.com/max/1600/1*D-rdCEVxbkbGOVdrA3v4bA.png"
+          alt="ngx-loadable logo"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+<div class="container">
+  <div class="section">
 
+    <div class="columns">
+      <div class="column">
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              LazyModule (exists)
+              <span
+                class="tag"
+                [ngClass]="{ 'is-danger': !isLoaded, 'is-success': isLoaded }"
+              >
+                {{ isLoaded ? "Loaded" : "Not yet loaded" }}
+              </span>
+            </p>
+
+          </header>
+          <div class="card-content">
+              <div class="buttons">
+                  <button class="button" (click)="show = true">Force Load</button>
+                  <button
+                    class="button is-primary"
+                    (mouseover)="lazyModule.preload()"
+                  >
+                    Preload on hover
+                  </button>
+                  <button class="button" (click)="load()">
+                    Preload using Service
+                  </button>
+                </div>
+              <ngx-loadable module="lazy" [show]="show" #lazyModule>
+                <div loading>Loading</div>
+              </ngx-loadable>
+            </div>
+        </div>
+
+
+      </div>
+      <div class="column">
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">LazyBoyModule (doesn't exists)</p>
+          </header>
+          <div class="card-content">
+            <ngx-loadable module="lazyBoy" [show]="true">
+              <div error>
+                  <div class="notification is-danger">
+                      Error Loading the module!
+                    </div>
+              </div>
+            </ngx-loadable>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

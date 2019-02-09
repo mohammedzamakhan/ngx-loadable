@@ -1,4 +1,6 @@
-import { Injectable, InjectionToken } from '@angular/core';
+import { Injectable, InjectionToken, NgModuleFactory, NgModuleFactoryLoader } from '@angular/core';
+import { capitalize } from './util';
+import { ILoadableConfig } from './loadable.config';
 
 export const LOADABLE_CONFIG = new InjectionToken<LoadableService>('LOADABLE_CONFIG');
 
@@ -7,19 +9,44 @@ export const LOADABLE_CONFIG = new InjectionToken<LoadableService>('LOADABLE_CON
 })
 export class LoadableService {
   public appDir = 'src/app/';
-  public fileMapping = {};
-  constructor() { }
+  public fileMappings = {};
+  constructor(private loader: NgModuleFactoryLoader,
+    ) { }
 
-  addConfig(config) {
+  addConfig(config: ILoadableConfig) {
     if (config.appDir) {
       this.appDir = config.appDir;
     }
 
-    if (config.fileMapping) {
-      this.fileMapping = {
-        ...this.fileMapping,
-        ...config.fileMapping,
+    if (config.fileMappings) {
+      this.fileMappings = {
+        ...this.fileMappings,
+        ...config.fileMappings,
       };
     }
+  }
+
+  getModulePath(module: string) {
+    return this.fileMappings[module] ||
+      `${this.appDir}${module}/${module}.module#${capitalize(module)}Module`;
+  }
+
+  preload(module: string): Promise<NgModuleFactory<any>> {
+    return this.loader
+      .load(this.getModulePath(module));
+  }
+
+  preloadAll(modules: string[]): Promise<NgModuleFactory<any>[]> {
+    return Promise.all(modules.map(module => {
+      return this.preload(module);
+    }));
+  }
+
+  _createComponent(moduleFactory, moduleRef, vcr) {
+    const rootComponent = (moduleFactory as any)._bootstrapComponents[0];
+    const factory = moduleRef.componentFactoryResolver.resolveComponentFactory(
+      rootComponent
+    );
+    vcr.createComponent(factory);
   }
 }

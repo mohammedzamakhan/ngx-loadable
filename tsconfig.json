@@ -20,7 +20,7 @@
     ],
     "paths": {
       "ngx-loadable": [
-        "dist/ngx-loadable"
+        "dist/loadable"
       ],
       "ngx-loadable/*": [
         "dist/ngx-loadable/*"

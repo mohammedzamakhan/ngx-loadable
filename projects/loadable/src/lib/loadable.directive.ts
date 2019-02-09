@@ -5,11 +5,9 @@ import {
   NgModuleRef,
   ViewContainerRef,
   Injector,
-  NgModuleFactoryLoader,
   NgModuleFactory,
 } from '@angular/core';
 import { LoadableService } from './loadable.service';
-import { capitalize } from './util';
 
 @Directive({
   selector: '[ngxLoadableModule]'
@@ -21,23 +19,14 @@ export class LoadableDirective implements OnInit {
   constructor(
     private vcr: ViewContainerRef,
     private injector: Injector,
-    private loader: NgModuleFactoryLoader,
     private loadableService: LoadableService
   ) {}
 
   ngOnInit() {
-    const module = this.loadableService.fileMapping[this.ngxLoadableModule] ||
-      // tslint:disable-next-line:max-line-length
-      `${this.loadableService.appDir}${this.ngxLoadableModule}/${this.ngxLoadableModule}.module#${capitalize(this.ngxLoadableModule)}Module`;
-    this.loader
-      .load(module)
+    this.loadableService.preload(this.ngxLoadableModule)
       .then((moduleFactory: NgModuleFactory<any>) => {
         this.moduleRef = moduleFactory.create(this.injector);
-        const rootComponent = (moduleFactory as any)._bootstrapComponents[0];
-        const factory = this.moduleRef.componentFactoryResolver.resolveComponentFactory(
-          rootComponent
-        );
-        this.vcr.createComponent(factory);
+        this.loadableService._createComponent(moduleFactory, this.moduleRef, this.vcr);
       });
 
   }

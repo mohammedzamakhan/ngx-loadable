@@ -48,7 +48,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/demo",
+            "outputPath": "docs",
             "index": "projects/demo/src/index.html",
             "main": "projects/demo/src/main.ts",
             "polyfills": "projects/demo/src/polyfills.ts",
@@ -61,7 +61,10 @@
               "projects/demo/src/styles.css"
             ],
             "scripts": [],
-            "es5BrowserSupport": true
+            "es5BrowserSupport": true,
+            "lazyModules": [
+              "projects/demo/src/app/lazy/lazy.module"
+            ]
           },
           "configurations": {
             "production": {
