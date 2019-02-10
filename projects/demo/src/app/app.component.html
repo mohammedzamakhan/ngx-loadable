@@ -19,7 +19,7 @@
       <div>
         <img
           width="75px"
-          src="https://cdn-images-1.medium.com/max/1600/1*D-rdCEVxbkbGOVdrA3v4bA.png"
+          src="/assets/ngx-loadable.svg"
           alt="ngx-loadable logo"
         />
       </div>
@@ -58,8 +58,18 @@
                 Preload using Service
               </button>
             </div>
-            <ngx-loadable module="lazy" [show]="show" #lazyModule>
-              <div loading>Loading</div>
+            Timeout Value: {{timeOut}} ms
+            <input class="slider is-fullwidth" step="1" min="0" max="1000" [(ngModel)]="timeOut" type="range">
+
+            <ngx-loadable module="lazy" [show]="show" #lazyModule [timeout]="timeOut">
+              <div loading><div class="notification is-info">
+                Loading...
+              </div></div>
+              <div timedOut>
+                <div class="notification is-warning">
+                  TIMED OUTT!! <button class="button" (click)="lazyModule.reload()">Retry</button>
+                </div>
+              </div>
             </ngx-loadable>
           </div>
         </div>

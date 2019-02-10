@@ -1,0 +1,18 @@
+<svg width="250" height="250" xmlns="http://www.w3.org/2000/svg">
+ <style type="text/css">.st0{fill:#1eb08e;}
+	.st1{fill:#5b554e;}</style>
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g id="svg_1">
+   <polygon id="svg_2" points="125,30 125,30 125,30 31.9,63.2 46.1,186.3 125,230 125,230 125,230 203.9,186.3 218.1,63.2  " class="st0"/>
+   <polygon id="svg_3" points="125,30 125,52.2 125,52.1 125,153.4 125,153.4 125,230 125,230 203.9,186.3 218.1,63.2 125,30  " class="st1"/>
+   <text stroke="null" transform="rotate(-0.5709709525108337 124.4123306274447,135.8398284912104) matrix(3.7970082281548585,0,0,4.775775217862147,-188.70183822878585,-337.89432931649117) " xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_6" y="107.437629" x="70.471263" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#000000">💨</text>
+  </g>
+  <text stroke="#000" transform="matrix(6.395784378051758,0,0,1.8742173910140991,-420.8711814880371,-86.05577442795038) " xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_4" y="120.4375" x="78" stroke-width="0" fill="#000000"/>
+ </g>
+</svg>

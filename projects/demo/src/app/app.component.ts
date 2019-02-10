@@ -12,6 +12,7 @@ export class AppComponent {
   show = false;
   showLazyBoy = false;
   manuallyLoaded = false;
+  timeOut = 100;
   @ViewChild('lazyModule') lazyModule: LoadableComponent;
 
   get isLoaded() {

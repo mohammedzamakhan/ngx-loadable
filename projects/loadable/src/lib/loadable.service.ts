@@ -1,4 +1,4 @@
-import { Injectable, InjectionToken, NgModuleFactory, NgModuleFactoryLoader } from '@angular/core';
+import { Injectable, InjectionToken, NgModuleFactory, NgModuleFactoryLoader, ViewContainerRef } from '@angular/core';
 import { capitalize } from './util';
 import { ILoadableConfig } from './loadable.config';
 
@@ -42,11 +42,12 @@ export class LoadableService {
     }));
   }
 
-  _createComponent(moduleFactory, moduleRef, vcr) {
+  _createComponent(moduleFactory: any, moduleRef, vcr: ViewContainerRef) {
     const rootComponent = (moduleFactory as any)._bootstrapComponents[0];
     const factory = moduleRef.componentFactoryResolver.resolveComponentFactory(
       rootComponent
     );
+    vcr.remove();
     vcr.createComponent(factory);
   }
 }
