@@ -12,6 +12,7 @@
         <a
           href="https://github.com/mohammedzamakhan/ngx-loadable"
           target="_blank"
+          rel="noreferrer"
           class="button is-large is-link"
           >View on GitHub</a
         >
@@ -59,7 +60,7 @@
               </button>
             </div>
             Timeout Value: {{timeOut}} ms
-            <input class="slider is-fullwidth" step="1" min="0" max="1000" [(ngModel)]="timeOut" type="range">
+            <input class="slider is-fullwidth" step="1" min="0" max="1000" [(ngModel)]="timeOut" type="range" aria-label="Timeout Slider">
 
             <ngx-loadable module="lazy" [show]="show" #lazyModule [timeout]="timeOut">
               <div loading><div class="notification is-info">
