@@ -16,7 +16,7 @@ export class AppComponent {
   @ViewChild('lazyModule') lazyModule: LoadableComponent;
 
   get isLoaded() {
-    return this.lazyModule.preloaded || this.manuallyLoaded;
+    return this.lazyModule.loaded || this.manuallyLoaded;
   }
 
   constructor(private loadableService: LoadableService) {

@@ -1,8 +1,9 @@
 import { NgModule, Inject, Optional, NgModuleFactoryLoader, SystemJsNgModuleLoader } from '@angular/core';
-import { LoadableComponent } from './loadable.component';
-import { CommonModule } from '@angular/common';
-import { LOADABLE_CONFIG, LoadableService } from './loadable.service';
 import { ModuleWithProviders } from '@angular/compiler/src/core';
+import { CommonModule } from '@angular/common';
+
+import { LoadableComponent } from './loadable.component';
+import { LOADABLE_CONFIG, LoadableService } from './loadable.service';
 import { ILoadableConfig } from './loadable.config';
 
 @NgModule({
@@ -27,23 +28,14 @@ export class LoadableModule {
     };
   }
 
-  static forChild(config: ILoadableConfig = {}): ModuleWithProviders {
-    return {
-      ngModule: LoadableModule,
-      providers: [
-        { provide: LOADABLE_CONFIG, useValue: config, multi: true },
-      ],
-    };
-  }
-
   constructor(
-    configService: LoadableService,
+    ls: LoadableService,
     @Optional() @Inject(LOADABLE_CONFIG) configs: ILoadableConfig[] = [],
   ) {
     if (!configs) {
       return;
     }
 
-    configs.forEach(config => configService.addConfig(config));
+    configs.forEach(config => ls.addConfig(config));
   }
 }

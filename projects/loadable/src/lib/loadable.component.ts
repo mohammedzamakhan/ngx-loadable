@@ -11,13 +11,14 @@ import {
   OnChanges
 } from '@angular/core';
 import { LoadableService } from './loadable.service';
+import { NgModuleFactory } from '@angular/core/src/render3';
 
 @Component({
   selector: 'ngx-loadable',
   template: `
-    <ng-content *ngIf="loadingModule && !timedOut" select="[loading]"></ng-content>
+    <ng-content *ngIf="loading && !timedOut" select="[loading]"></ng-content>
     <ng-content *ngIf="error" select="[error]"></ng-content>
-    <ng-content *ngIf="timedOut && !preloaded" select="[timedOut]"></ng-content>
+    <ng-content *ngIf="timedOut && !loaded" select="[timedOut]"></ng-content>
     <ng-template #content></ng-template>
   `,
   styles: [],
@@ -29,15 +30,15 @@ export class LoadableComponent implements OnChanges {
   @Input() timeout: number | undefined;
 
   @ViewChild('content', {read: ViewContainerRef }) vcr: ViewContainerRef;
-  private moduleRef: NgModuleRef<any>;
-  loadingModule = false;
-  preloaded = false;
+  private mr: NgModuleRef<any>;
+  loading = false;
+  loaded = false;
   error = false;
   timedOut: boolean;
 
   constructor(
-    private injector: Injector,
-    private loadableService: LoadableService,
+    private inj: Injector,
+    private ls: LoadableService,
     private cd: ChangeDetectorRef
   ) {}
 
@@ -47,11 +48,11 @@ export class LoadableComponent implements OnChanges {
     }
 
     try {
-      const moduleFactory = await this.loadableService.preload(this.module);
-      this.preloaded = true;
+      const mf = await this.ls.preload(this.module);
+      this.loaded = true;
       this.timedOut = false;
-      this.moduleRef = moduleFactory.create(this.injector);
-      return moduleFactory;
+      this.mr = mf.create(this.inj);
+      return mf;
     } catch (error) {
       this.error = error;
       this.cd.detectChanges();
@@ -59,9 +60,9 @@ export class LoadableComponent implements OnChanges {
     }
   }
 
-  private _loadComponent(moduleFactory) {
-    this.loadableService._createComponent(moduleFactory, this.moduleRef, this.vcr);
-    this.loadingModule = false;
+  private _render() {
+    this.ls._createComponent(this.mr, this.vcr);
+    this.loading = false;
     this.cd.detectChanges();
   }
 
@@ -72,7 +73,7 @@ export class LoadableComponent implements OnChanges {
   }
 
   loadFn() {
-    this.loadingModule = true;
+    this.loading = true;
     if (this.timeout === 0) {
       this.timedOut = true;
     } else if (this.timeout > 0) {
@@ -82,11 +83,11 @@ export class LoadableComponent implements OnChanges {
       }, this.timeout);
     }
     this.preload()
-      .then((moduleFactory) => {
-        if (moduleFactory instanceof Error) {
+      .then((mf) => {
+        if (mf instanceof Error) {
           return;
         }
-        this._loadComponent(moduleFactory);
+        this._render();
       });
   }
 
@@ -94,8 +95,8 @@ export class LoadableComponent implements OnChanges {
     if (!changes.show.currentValue) {
       return;
     }
-    if (this.preloaded) {
-      this._loadComponent(this.moduleRef);
+    if (this.loaded) {
+      this._render();
       return;
     }
     this.loadFn();
