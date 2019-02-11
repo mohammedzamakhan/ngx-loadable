@@ -3,18 +3,17 @@ import { LoadableComponent } from './loadable.component';
 import { CommonModule } from '@angular/common';
 import { LOADABLE_CONFIG, LoadableService } from './loadable.service';
 import { ModuleWithProviders } from '@angular/compiler/src/core';
-import { LoadableDirective } from './loadable.directive';
 import { ILoadableConfig } from './loadable.config';
 
 @NgModule({
-  declarations: [LoadableComponent, LoadableDirective],
+  declarations: [LoadableComponent],
   imports: [
     CommonModule
   ],
   providers: [
     { provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }
   ],
-  exports: [LoadableComponent, LoadableDirective]
+  exports: [LoadableComponent]
 })
 export class LoadableModule {
   static forRoot(config: ILoadableConfig = {}): ModuleWithProviders  {

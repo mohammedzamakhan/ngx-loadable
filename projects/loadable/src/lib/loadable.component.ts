@@ -4,7 +4,6 @@ import {
   Input,
   ViewContainerRef,
   Injector,
-  NgModuleFactory,
   ViewChild,
   SimpleChanges,
   ChangeDetectionStrategy,
@@ -16,10 +15,10 @@ import { LoadableService } from './loadable.service';
 @Component({
   selector: 'ngx-loadable',
   template: `
-  <ng-content *ngIf="loadingModule" select="[loading]"></ng-content>
-  <ng-content *ngIf="error" select="[error]"></ng-content>
-  <ng-content *ngIf="timedOut" select="[timedOut]"></ng-content>
-  <ng-template #content></ng-template>
+    <ng-content *ngIf="loadingModule && !timedOut" select="[loading]"></ng-content>
+    <ng-content *ngIf="error" select="[error]"></ng-content>
+    <ng-content *ngIf="timedOut && !preloaded" select="[timedOut]"></ng-content>
+    <ng-template #content></ng-template>
   `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -35,7 +34,6 @@ export class LoadableComponent implements OnChanges {
   preloaded = false;
   error = false;
   timedOut: boolean;
-  preloadFinished: boolean;
 
   constructor(
     private injector: Injector,
@@ -75,16 +73,12 @@ export class LoadableComponent implements OnChanges {
 
   loadFn() {
     this.loadingModule = true;
-    if (this.timeout === 0 && !this.preloaded) {
+    if (this.timeout === 0) {
       this.timedOut = true;
-      this.loadingModule = false;
-    } else if (this.timeout > 0 && !this.preloaded) {
+    } else if (this.timeout > 0) {
       setTimeout(() => {
-        if (!this.preloaded) {
-          this.timedOut = true;
-          this.loadingModule = false;
-          this.cd.detectChanges();
-        }
+        this.timedOut = true;
+        this.cd.detectChanges();
       }, this.timeout);
     }
     this.preload()
