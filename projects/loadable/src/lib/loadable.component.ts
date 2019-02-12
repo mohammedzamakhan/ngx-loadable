@@ -11,14 +11,13 @@ import {
   OnChanges
 } from '@angular/core';
 import { LoadableService } from './loadable.service';
-import { NgModuleFactory } from '@angular/core/src/render3';
 
 @Component({
   selector: 'ngx-loadable',
   template: `
     <ng-content *ngIf="loading && !timedOut" select="[loading]"></ng-content>
     <ng-content *ngIf="error" select="[error]"></ng-content>
-    <ng-content *ngIf="timedOut && !loaded" select="[timedOut]"></ng-content>
+    <ng-content *ngIf="timedOut && !error && !loaded" select="[timedOut]"></ng-content>
     <ng-template #content></ng-template>
   `,
   styles: [],
@@ -61,7 +60,7 @@ export class LoadableComponent implements OnChanges {
   }
 
   private _render() {
-    this.ls._createComponent(this.mr, this.vcr);
+    this.ls._renderVCR(this.mr, this.vcr);
     this.loading = false;
     this.cd.detectChanges();
   }
@@ -73,6 +72,9 @@ export class LoadableComponent implements OnChanges {
   }
 
   loadFn() {
+    if (typeof this.timeout === 'string') {
+      this.timeout = parseInt(this.timeout, 10);
+    }
     this.loading = true;
     if (this.timeout === 0) {
       this.timedOut = true;
@@ -87,19 +89,18 @@ export class LoadableComponent implements OnChanges {
         if (mf instanceof Error) {
           return;
         }
+        this.loading = false;
         this._render();
       });
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (!changes.show.currentValue) {
-      return;
+    if (changes.show && changes.show.currentValue) {
+      if (this.loaded) {
+        this._render();
+        return;
+      }
+      this.loadFn();
     }
-    if (this.loaded) {
-      this._render();
-      return;
-    }
-    this.loadFn();
   }
-
 }
