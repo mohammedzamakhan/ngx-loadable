@@ -76,6 +76,7 @@ export class LoadableComponent implements OnChanges {
       this.timeout = parseInt(this.timeout, 10);
     }
     this.loading = true;
+    this.cd.detectChanges();
     if (this.timeout === 0) {
       this.timedOut = true;
     } else if (this.timeout > 0) {

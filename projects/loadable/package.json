@@ -1,6 +1,6 @@
 {
   "name": "ngx-loadable",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "ngx-loadable: Simpler Lazy Loading Non Routable Angular Modules",
   "keywords" :["Angular", "Lazy Loading", "Library"],
   "license" : "MIT",
