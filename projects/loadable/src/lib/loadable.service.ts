@@ -1,5 +1,5 @@
 import { Injectable, InjectionToken, NgModuleFactory, NgModuleFactoryLoader, ViewContainerRef, NgModuleRef } from '@angular/core';
-import { capitalize } from './util';
+import { pascalCase } from './util';
 import { ILoadableConfig } from './loadable.config';
 
 export const LOADABLE_CONFIG = new InjectionToken<LoadableService>('LOADABLE_CONFIG');
@@ -28,7 +28,7 @@ export class LoadableService {
 
   getModulePath(module: string) {
     return this.fileMappings[module] ||
-      `${this.appDir}${module}/${module}.module#${capitalize(module)}Module`;
+      `${this.appDir}${module}/${module}.module#${pascalCase(module)}Module`;
   }
 
   preload(module: string): Promise<NgModuleFactory<any>> {
