@@ -19,8 +19,7 @@ Angular provides an easy way for adding route based lazy loading modules. But in
 
 ## Solution
 
-The `ngx-loadable` wraps the complex implementation for lazy loading non routable modules in a simple API. It provides a Directive and a Component to lazy load modules. A directive can be used for simple lazy loading modules, but if you want more control over the loading of lazy loading modules, by prefetching, then prefer using component.
-
+The `ngx-loadable` wraps the complex implementation for lazy loading non routable modules in a simple API. It provides a component `ngx-loadable` and a service `LoadableService` to lazy load modules. A component can be used to control the loading of one module and to display different states, i.e. loading, error, timedOut and loaded.
 ## Install
 
 Install and manage the ngx-loadable using NPM. You may use `yarn` or `npm`.
@@ -36,6 +35,8 @@ or
 ### NgModule
 Import the LoadableModule in the NgModule and declare them in the "imports", you can also use the `forRoot()` for `forChild()` function.
 
+- Step 1:
+
 ``` ts
 import { LoadableModule } from 'ngx-loadable';
 
@@ -46,6 +47,50 @@ import { LoadableModule } from 'ngx-loadable';
 })
 ```
 
+- Step 2:
+Create a Module with a Component bootstrapped to the Module
+
+- Step 3:
+Include the module path in the lazyModules array in angular.json file, for it to be created as a lazy module by Angular CLI
+
+- Step 4:
+Use the `ngx-loadable` component
+```html
+<button (click)="show = true" (mouseenter)="loginModalModule.preload()">
+    Preload on mouseenter and show on click
+</button>
+<ngx-loadable
+    #loginModalModule
+    [module]="'login-modal'"
+    [show]="show"
+    [timeout]="1000"
+>
+    <div loading>Loading...</div>
+    <div error>Error</div>
+    <div timedOut>
+        TimedOut!
+        <button (click)="loginModalModule.reload()">
+            Reload
+        </button>
+    </div>
+</ngx-loadable>
+```
+
+or use the `LoadableService`
+
+```ts
+import { LoadableService } from 'ngx-loadable';
+...
+class YourComponent {
+    contructor(private loadableService: LoadableService) { }
+    load() {
+        this.loadableService.preload('lazy')
+            .then(() => console.log('loaded'))
+            .catch((error) => console.error(error));
+        }
+    }
+}
+```
 ## Contribute
 
 Please contribute by creating issues/PRs
