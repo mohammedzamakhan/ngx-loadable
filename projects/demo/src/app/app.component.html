@@ -29,8 +29,11 @@
 </section>
 <div class="container">
   <div class="section">
-    <h1 class="is-size-3">Example</h1>
-    <p style="margin-bottom: 30px;">The following example shows different ways to load non routable Angular Modules, and also different states (loading and error).</p>
+    <h1 class="is-size-3">Examples</h1>
+    <p style="margin-bottom: 30px;">
+      The following example shows different ways to load non routable Angular
+      Modules, and also different states (loading and error).
+    </p>
     <div class="columns">
       <div class="column">
         <div class="card">
@@ -53,22 +56,40 @@
                 (click)="show = true"
                 (mouseover)="lazyModule.preload()"
               >
-                Preload on hover
+                Hover to preload / Click to Show
               </button>
               <button class="button" (click)="load()">
-                Preload using Service
+                Click to Preload using Service
               </button>
             </div>
-            Timeout Value: {{timeOut}} ms
-            <input class="slider is-fullwidth" step="1" min="0" max="1000" [(ngModel)]="timeOut" type="range" aria-label="Timeout Slider">
+            Timeout Value: {{ timeOut }} ms
+            <input
+              class="slider is-fullwidth"
+              step="1"
+              min="0"
+              max="1000"
+              [(ngModel)]="timeOut"
+              type="range"
+              aria-label="Timeout Slider"
+            />
 
-            <ngx-loadable module="lazy" [show]="show" #lazyModule [timeout]="timeOut">
-              <div loading><div class="notification is-info">
-                Loading...
-              </div></div>
+            <ngx-loadable
+              module="lazy"
+              [show]="show"
+              #lazyModule
+              [timeout]="timeOut"
+            >
+              <div loading>
+                <div class="notification is-info">
+                  Loading...
+                </div>
+              </div>
               <div timedOut>
                 <div class="notification is-warning">
-                  TIMED OUTT!! <button class="button" (click)="lazyModule.reload()">Retry</button>
+                  TIMED OUTT!!
+                  <button class="button" (click)="lazyModule.reload()">
+                    Retry
+                  </button>
                 </div>
               </div>
               <div error>
@@ -99,4 +120,133 @@
       </div>
     </div>
   </div>
+
+  <div class="section">
+      <h1 class="is-size-3">
+        Using PerimeterModule from <a href="https://github.com/mohammedzamakhan/ngx-perimeter" target="_blank" rel="noreferrer">ngx-perimeter</a>
+      </h1>
+      <p style="padding-bottom: 30px">If you go near the button's boundary, the BreachModule will be loaded</p>
+
+      <div class="columns">
+        <div class="column">
+          <div class="card">
+            <header class="card-header">
+              <p class="card-header-title">
+                BreachModule (exists)
+                <span
+                  class="tag"
+                  [ngClass]="{
+                    'is-danger': !isBreachLoaded,
+                    'is-success': isBreachLoaded
+                  }"
+                >
+                  {{ isBreachLoaded ? "Loaded" : "Not yet loaded" }}
+                </span>
+              </p>
+            </header>
+            <div class="card-content">
+              <div class="breach-area">
+                  <button ngxPerimeter (breach)="breachModule.preload()" (click)="showBreach = true" padding="60" class="button is-warning">Breach to Load/Click to show</button>
+              </div>
+              <div>
+                <ngx-loadable
+                  module="breach"
+                  [show]="showBreach"
+                  #breachModule
+                  [timeout]="timeOut"
+                >
+                  <div loading>
+                    <div class="notification is-info">
+                      Loading...
+                    </div>
+                  </div>
+                  <div timedOut>
+                    <div class="notification is-warning">
+                      TIMED OUTT!!
+                      <button class="button" (click)="bottomModule.reload()">
+                        Retry
+                      </button>
+                    </div>
+                  </div>
+                  <div error>
+                    <div class="notification is-danger">
+                      Error Loading the module!
+                    </div>
+                  </div>
+                </ngx-loadable>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 20px;">
+          <p>Scroll Down to load a Module when in viewport</p>
+          <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 768 768"><path d="M640.5 384L384 640.5 127.5 384l46.5-45 178.5 178.5v-390h63v390l180-178.5z"/></svg>
+        </div>
+    </div>
+
+  <div class="section bottom">
+    <h1 class="is-size-3">
+      Using InViewportModule from <a href="https://github.com/xmlking/ngx-starter-kit/tree/develop/libs/ngx-utils#inviewport-directive" target="_blank" rel="noreferrer">@ngx-starter-kit/ngx-utils</a>
+    </h1>
+    <blockquote class="twitter-tweet" data-conversation="none" lang="en">
+      <p>
+        <a href="https://twitter.com/mgechev/status/1088516841842987008"
+          >Jan 24, 2019</a
+        >
+      </p>
+    </blockquote>
+
+    <div class="columns">
+      <div class="column">
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              BottomModule (exists)
+              <span
+                class="tag"
+                [ngClass]="{
+                  'is-danger': !isBottomLoaded,
+                  'is-success': isBottomLoaded
+                }"
+              >
+                {{ isBottomLoaded ? "Loaded" : "Not yet loaded" }}
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <div ngxInViewport (inViewport)="loadBottomModule($event)">
+              <ngx-loadable
+                module="bottom"
+                [show]="showBottom"
+                #bottomModule
+                [timeout]="timeOut"
+              >
+                <div loading>
+                  <div class="notification is-info">
+                    Loading...
+                  </div>
+                </div>
+                <div timedOut>
+                  <div class="notification is-warning">
+                    TIMED OUTT!!
+                    <button class="button" (click)="bottomModule.reload()">
+                      Retry
+                    </button>
+                  </div>
+                </div>
+                <div error>
+                  <div class="notification is-danger">
+                    Error Loading the module!
+                  </div>
+                </div>
+              </ngx-loadable>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 </div>

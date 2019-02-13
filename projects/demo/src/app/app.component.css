@@ -1,0 +1,26 @@
+.bottom {
+  margin-top: 30%;
+}
+
+.section {
+  text-align: center;
+}
+
+::ng-deep twitter-widget {
+  margin: 0 auto!important;
+  margin-bottom: 10px!important;
+}
+
+.breach-area {
+  margin-bottom: 20px;
+  display: inline-block;
+  padding: 60px;
+  background-image: linear-gradient(45deg, #edb92b 25%, #fcfcfc 25%, #fcfcfc 50%, #edb92b 50%, #edb92b 75%, #fcfcfc 75%, #fcfcfc 100%);
+background-size: 56.57px 56.57px;
+}
+
+.button.is-warning {
+  background: #edb92b;
+  color: white;
+  border: 2px solid black;
+}

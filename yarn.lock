@@ -288,6 +288,12 @@
     tree-kill "1.2.1"
     webpack-sources "1.3.0"
 
+"@ngx-starter-kit/ngx-utils@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@ngx-starter-kit/ngx-utils/-/ngx-utils-0.0.4.tgz#81ceecabe92be827f4b2684def15e4d3809d3f48"
+  dependencies:
+    tslib "^1.9.0"
+
 "@nodelib/fs.stat@^1.1.2":
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
@@ -1818,6 +1824,10 @@ dashdash@^1.12.0:
   resolved "https://registry.yarnpkg.com/dashdash/-/dashdash-1.14.1.tgz#853cfa0f7cbe2fed5de20326b8dd581035f6e2f0"
   dependencies:
     assert-plus "^1.0.0"
+
+date-fns@^2.0.0-alpha.27:
+  version "2.0.0-alpha.27"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.0.0-alpha.27.tgz#5ecd4204ef0e7064264039570f6e8afbc014481c"
 
 date-format@^1.2.0:
   version "1.2.0"
@@ -4398,6 +4408,12 @@ ng-packagr@^4.2.0:
     stylus "^0.54.5"
     uglify-js "^3.0.7"
     update-notifier "^2.3.0"
+
+ngx-perimeter@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/ngx-perimeter/-/ngx-perimeter-0.0.1.tgz#b668d96628468cba8642bba182e72c0ed76d65a0"
+  dependencies:
+    tslib "^1.9.0"
 
 nice-try@^1.0.4:
   version "1.0.5"
