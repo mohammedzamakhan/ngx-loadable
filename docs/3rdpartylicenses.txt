@@ -71,6 +71,9 @@ date-fns is licensed under the [MIT license](http://kossnocorp.mit-license.org).
 Read more about MIT at [TLDRLegal](https://tldrlegal.com/license/mit-license).
 
 
+intersection-observer
+W3C-20150513
+
 lodash
 MIT
 Copyright JS Foundation and other contributors <https://js.foundation/>
