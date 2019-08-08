@@ -78,6 +78,7 @@
               [show]="show"
               #lazyModule
               [timeout]="timeOut"
+              (init)="lazyInit($event)"
             >
               <div loading>
                 <div class="notification is-info">
@@ -179,13 +180,13 @@
           </div>
         </div>
       </div>
-      <div style="text-align: center; margin-top: 20px;">
+      <!-- <div style="text-align: center; margin-top: 20px;">
           <p>Scroll Down to load a Module when in viewport</p>
           <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 768 768"><path d="M640.5 384L384 640.5 127.5 384l46.5-45 178.5 178.5v-390h63v390l180-178.5z"/></svg>
-        </div>
+        </div> -->
     </div>
 
-  <div class="section bottom">
+  <!-- <div class="section bottom">
     <h1 class="is-size-3">
       Using InViewportModule from <a href="https://github.com/xmlking/ngx-starter-kit/tree/develop/libs/ngx-utils#inviewport-directive" target="_blank" rel="noreferrer">@ngx-starter-kit/ngx-utils</a>
     </h1>
@@ -246,7 +247,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
 
 </div>

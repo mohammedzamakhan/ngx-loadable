@@ -8,7 +8,9 @@ import {
   SimpleChanges,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  OnChanges
+  OnChanges,
+  Output,
+  EventEmitter
 } from '@angular/core';
 import { LoadableService } from './loadable.service';
 
@@ -21,14 +23,14 @@ import { LoadableService } from './loadable.service';
     <ng-template #content></ng-template>
   `,
   styles: [],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoadableComponent implements OnChanges {
   @Input() module: string;
   @Input() show = false;
   @Input() timeout: number | undefined;
+  @Output() init = new EventEmitter();
 
-  @ViewChild('content', {read: ViewContainerRef }) vcr: ViewContainerRef;
+  @ViewChild('content', { read: ViewContainerRef, static: true }) vcr: ViewContainerRef;
   private mr: NgModuleRef<any>;
   loading = false;
   loaded = false;
@@ -38,7 +40,6 @@ export class LoadableComponent implements OnChanges {
   constructor(
     private inj: Injector,
     private ls: LoadableService,
-    private cd: ChangeDetectorRef
   ) {}
 
   public async preload() {
@@ -54,15 +55,14 @@ export class LoadableComponent implements OnChanges {
       return mf;
     } catch (error) {
       this.error = error;
-      this.cd.detectChanges();
       return error;
     }
   }
 
   private _render() {
-    this.ls._renderVCR(this.mr, this.vcr);
+    const componentRef = this.ls._renderVCR(this.mr, this.vcr);
+    this.init.next(componentRef);
     this.loading = false;
-    this.cd.detectChanges();
   }
 
   reload() {
@@ -76,13 +76,11 @@ export class LoadableComponent implements OnChanges {
       this.timeout = parseInt(this.timeout, 10);
     }
     this.loading = true;
-    this.cd.detectChanges();
     if (this.timeout === 0) {
       this.timedOut = true;
     } else if (this.timeout > 0) {
       setTimeout(() => {
         this.timedOut = true;
-        this.cd.detectChanges();
       }, this.timeout);
     }
     this.preload()

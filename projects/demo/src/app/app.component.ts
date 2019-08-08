@@ -1,6 +1,8 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, ComponentRef } from '@angular/core';
 import { LoadableService, LoadableComponent } from 'ngx-loadable';
 import { LazyModule } from './lazy/lazy.module';
+import { NgComponentOutlet } from '@angular/common';
+import { LazyComponent } from './lazy/lazy.component';
 
 @Component({
   selector: 'app-root',
@@ -14,9 +16,12 @@ export class AppComponent implements AfterViewInit {
   showLazyBoy = false;
   manuallyLoaded = false;
   timeOut = 100;
-  @ViewChild('lazyModule') lazyModule: LoadableComponent;
-  @ViewChild('bottomModule') bottomModule: LoadableComponent;
-  @ViewChild('breachModule') breachModule: LoadableComponent;
+  obj = {
+    string: 'Input'
+  };
+  @ViewChild('lazyModule', { static: true }) lazyModule: LoadableComponent;
+  @ViewChild('bottomModule', { static: true }) bottomModule: LoadableComponent;
+  @ViewChild('breachModule', { static: true }) breachModule: LoadableComponent;
   showBreach: boolean;
 
   get isLoaded() {
@@ -54,5 +59,15 @@ export class AppComponent implements AfterViewInit {
 
   loadBreachModule() {
     this.showBreach = true;
+  }
+
+  lazyInit({instance: lazyComponent}: ComponentRef<LazyComponent>) {
+    let i = 0;
+    lazyComponent.input = 'Updated by AppComponent using Input';
+
+    lazyComponent.output.subscribe(() => {
+      i++;
+      lazyComponent.input = 'Updated by AppComponent using Output ' + i;
+    });
   }
 }

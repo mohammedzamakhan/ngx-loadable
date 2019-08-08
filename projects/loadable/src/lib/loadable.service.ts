@@ -48,6 +48,6 @@ export class LoadableService {
       rootComponent
     );
     vcr.remove();
-    vcr.createComponent(factory);
+    return vcr.createComponent(factory);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import * as moment from 'moment';
 import _ from 'lodash';
 
@@ -8,6 +8,8 @@ import _ from 'lodash';
   styleUrls: ['./lazy.component.css']
 })
 export class LazyComponent implements OnInit {
+  @Input() input = 'Default Input';
+  @Output() output = new EventEmitter();
   time;
   lodash;
   constructor() { }
@@ -15,6 +17,10 @@ export class LazyComponent implements OnInit {
   ngOnInit() {
     this.time = moment().format('MMMM Do YYYY, h:mm:ss a');
     this.lodash = _.get(this.time);
+  }
+
+  update() {
+    this.output.emit();
   }
 
 }
