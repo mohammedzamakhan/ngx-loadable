@@ -35,11 +35,6 @@ MIT
 @angular/platform-browser
 MIT
 
-@angular/router
-MIT
-
-@ngx-starter-kit/ngx-utils
-
 core-js
 MIT
 Copyright (c) 2014-2019 Denis Pushkarev
@@ -63,20 +58,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-date-fns
-MIT
-# License
-
-date-fns is licensed under the [MIT license](http://kossnocorp.mit-license.org).
-Read more about MIT at [TLDRLegal](https://tldrlegal.com/license/mit-license).
-
-
 intersection-observer
 W3C-20150513
 
 lodash
 MIT
-Copyright JS Foundation and other contributors <https://js.foundation/>
+Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
 
 Based on Underscore.js, copyright Jeremy Ashkenas,
 DocumentCloud and Investigative Reporters & Editors <http://underscorejs.org/>
@@ -441,8 +428,6 @@ If the Work includes a "NOTICE" text file as part of its distribution, then any 
 
 END OF TERMS AND CONDITIONS
 
-
-undefined
 
 webpack
 MIT
