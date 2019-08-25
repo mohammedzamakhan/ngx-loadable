@@ -1,7 +1,5 @@
 import { Component, ViewChild, AfterViewInit, ComponentRef } from '@angular/core';
 import { LoadableService, LoadableComponent } from 'ngx-loadable';
-import { LazyModule } from './lazy/lazy.module';
-import { NgComponentOutlet } from '@angular/common';
 import { LazyComponent } from './lazy/lazy.component';
 
 @Component({
@@ -43,7 +41,7 @@ export class AppComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     // @ts-ignore
     twttr.widgets.load();
-}
+  }
 
   load() {
     this.loadableService.preload('lazy')

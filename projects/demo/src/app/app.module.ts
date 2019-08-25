@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { PerimeterModule } from 'ngx-perimeter';
 import { AppComponent } from './app.component';
 import { LoadableModule } from 'ngx-loadable';
+import { InViewportModule } from '@ngx-starter-kit/ngx-utils';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { LoadableModule } from 'ngx-loadable';
     PerimeterModule,
     LoadableModule.forRoot({
       appDir: 'projects/demo/src/app/'
-    })
+    }),
+    InViewportModule
   ],
   providers: [],
   bootstrap: [AppComponent]

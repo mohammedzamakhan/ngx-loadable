@@ -35,6 +35,11 @@ MIT
 @angular/platform-browser
 MIT
 
+@angular/router
+MIT
+
+@ngx-starter-kit/ngx-utils
+
 core-js
 MIT
 Copyright (c) 2014-2019 Denis Pushkarev
@@ -56,6 +61,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
+
+date-fns
+MIT
+# License
+
+date-fns is licensed under the [MIT license](http://kossnocorp.mit-license.org).
+Read more about MIT at [TLDRLegal](https://tldrlegal.com/license/mit-license).
 
 
 intersection-observer
@@ -428,6 +441,8 @@ If the Work includes a "NOTICE" text file as part of its distribution, then any 
 
 END OF TERMS AND CONDITIONS
 
+
+undefined
 
 webpack
 MIT

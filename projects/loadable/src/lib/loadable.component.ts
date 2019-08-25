@@ -17,7 +17,7 @@ import { LoadableService } from './loadable.service';
 @Component({
   selector: 'ngx-loadable',
   template: `
-    <ng-content *ngIf="loading && !timedOut" select="[loading]"></ng-content>
+    <ng-content *ngIf="loading && !timedOut && !error" select="[loading]"></ng-content>
     <ng-content *ngIf="error" select="[error]"></ng-content>
     <ng-content *ngIf="timedOut && !error && !loaded" select="[timedOut]"></ng-content>
     <ng-template #content></ng-template>
