@@ -1,42 +1,43 @@
-import { Injectable, InjectionToken, NgModuleFactory, NgModuleFactoryLoader, ViewContainerRef, NgModuleRef } from '@angular/core';
+import { Injectable, InjectionToken, NgModuleFactory, NgModuleFactoryLoader, ViewContainerRef, NgModuleRef, Compiler } from '@angular/core';
 import { pascalCase } from './util';
-import { ILoadableConfig } from './loadable.config';
+import { ILoadableConfig, FunctionReturningPromise, ModuleObject } from './loadable.config';
 
 export const LOADABLE_CONFIG = new InjectionToken<LoadableService>('LOADABLE_CONFIG');
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoadableService {
-  public appDir = 'src/app/';
-  public fileMappings = {};
-  constructor(private loader: NgModuleFactoryLoader,
-    ) { }
+  public modules: ModuleObject = {};
+  constructor(
+    private compiler: Compiler,
+  ) { }
 
   addConfig(config: ILoadableConfig) {
-    if (config.appDir) {
-      this.appDir = config.appDir;
-    }
-
-    if (config.fileMappings) {
-      this.fileMappings = {
-        ...this.fileMappings,
-        ...config.fileMappings,
+    if (config.modules) {
+      this.modules = {
+        ...this.modules,
+        ...config.modules,
       };
     }
   }
 
-  getModulePath(module: string) {
-    return this.fileMappings[module] ||
-      `${this.appDir}${module}/${module}.module#${pascalCase(module)}Module`;
+  getModule(module): FunctionReturningPromise {
+    return this.modules[module];
   }
 
-  preload(module: string): Promise<NgModuleFactory<any>> {
-    return this.loader
-      .load(this.getModulePath(module));
+  preload(module: string | FunctionReturningPromise): Promise<NgModuleFactory<any>> {
+    if (typeof module === 'string') {
+      module = this.getModule(module);
+    }
+    return module().then(Module => this.compiler.compileModuleAsync(Module));
   }
 
-  preloadAll(modules: string[]): Promise<NgModuleFactory<any>[]> {
+  preloadAll(modules?: (string | FunctionReturningPromise)[]): Promise<NgModuleFactory<any>[]> {
+    if (!modules) {
+      modules = Object.values(this.modules);
+    }
     return Promise.all(modules.map(module => {
       return this.preload(module);
     }));

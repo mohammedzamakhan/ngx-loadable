@@ -43,6 +43,10 @@ export class AppComponent implements AfterViewInit {
     twttr.widgets.load();
   }
 
+  preloadAll() {
+    this.loadableService.preloadAll();
+  }
+
   load() {
     this.loadableService.preload('lazy')
       .then(() => this.manuallyLoaded = true);

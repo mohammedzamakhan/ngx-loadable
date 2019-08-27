@@ -15,7 +15,11 @@ import { InViewportModule } from '@ngx-starter-kit/ngx-utils';
     FormsModule,
     PerimeterModule,
     LoadableModule.forRoot({
-      appDir: 'projects/demo/src/app/'
+      modules: {
+        lazy: () => import('./lazy/lazy.module').then(mod => mod.LazyModule),
+        bottom: () => import('./bottom/bottom.module').then(mod => mod.BottomModule),
+        breach: () => import('./breach/breach.module').then(mod => mod.BreachModule),
+      },
     }),
     InViewportModule
   ],
@@ -23,3 +27,4 @@ import { InViewportModule } from '@ngx-starter-kit/ngx-utils';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

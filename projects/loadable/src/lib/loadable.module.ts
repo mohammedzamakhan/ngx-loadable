@@ -1,4 +1,4 @@
-import { NgModule, Inject, Optional, NgModuleFactoryLoader, SystemJsNgModuleLoader } from '@angular/core';
+import { NgModule, Inject, Optional } from '@angular/core';
 import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { CommonModule } from '@angular/common';
 
@@ -11,13 +11,11 @@ import { ILoadableConfig } from './loadable.config';
   imports: [
     CommonModule
   ],
-  providers: [
-    { provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }
-  ],
+  providers: [],
   exports: [LoadableComponent]
 })
 export class LoadableModule {
-  static forRoot(config: ILoadableConfig = {}): ModuleWithProviders  {
+  static forRoot(config: any = {}): ModuleWithProviders  {
     return {
       ngModule: LoadableModule,
       providers: [
