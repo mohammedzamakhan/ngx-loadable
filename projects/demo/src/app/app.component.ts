@@ -72,4 +72,13 @@ export class AppComponent implements AfterViewInit {
       lazyComponent.input = 'Updated by AppComponent using Output ' + i;
     });
   }
+
+  initBreachModule({instance: breachComponent}) {
+    let i = 0;
+    breachComponent.input = 'Updated by AppComponent using Input';
+    breachComponent.addEventListener('output', () => {
+      i++;
+      breachComponent.input = 'Updated by AppComponent using Output ' + i;
+    });
+  }
 }

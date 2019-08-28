@@ -20,13 +20,14 @@ import { SpinnerComponent } from './spinner/spinner.component';
     PerimeterModule,
     LoadableModule.forRoot([{
       name: 'lazy',
-      load: () => new Promise((resolve) => setTimeout(() => resolve(import('./lazy/lazy.module').then(mod => mod.LazyModule)), 5000)),
+      load: () => import('./lazy/lazy.module').then(mod => mod.LazyModule),
     }, {
       name: 'bottom',
-      load: () => new Promise((resolve) => setTimeout(() => resolve(import('./bottom/bottom.module').then(mod => mod.BottomModule)), 5000)),
+      load: () => import('./bottom/bottom.module').then(mod => mod.BottomModule),
     }, {
-      name: 'breach',
-      load: () => new Promise((resolve) => setTimeout(() => resolve(import('./breach/breach.module').then(mod => mod.BreachModule)), 5000)),
+      name: 'app-breach',
+      load: () => import('./breach/breach.module').then(mod => mod.BreachModule),
+      isElement: true,
       loadingComponent: SpinnerComponent
     }], {
       loadingComponent: LoaderComponent,

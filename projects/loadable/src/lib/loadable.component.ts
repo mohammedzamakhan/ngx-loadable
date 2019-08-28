@@ -31,6 +31,7 @@ export class LoadableComponent implements OnChanges {
   @Input() loadingTemplate: TemplateRef<any>;
   @Input() errorTemplate: TemplateRef<any>;
   @Input() timeoutTemplate: TemplateRef<any>;
+  @Input() isElement = false;
   @Output() init = new EventEmitter();
 
   @ViewChild('content', { read: ViewContainerRef, static: true }) content: ViewContainerRef;
@@ -70,6 +71,16 @@ export class LoadableComponent implements OnChanges {
   }
 
   private _render() {
+    const module = this.ls.getModule(this.module);
+    if (this.isElement || module.isElement || this.options.elements) {
+      const componentInstance = document.createElement(module.name);
+      this.init.next({
+        instance: componentInstance,
+      });
+      this.el.nativeElement.appendChild(componentInstance);
+      this.loading = false;
+      return;
+    }
     const componentRef = this.ls._renderVCR(this.mr, this.content);
     this.init.next(componentRef);
     this.loading = false;

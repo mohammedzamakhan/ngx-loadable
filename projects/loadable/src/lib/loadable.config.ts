@@ -9,6 +9,7 @@ export interface ModuleConfig {
   errorComponent?: Type<any>;
   timeoutTemplate?: Type<any>;
   timeout?: number;
+  isElement?: boolean;
 }
 
 export interface ExtraOptions {
@@ -16,6 +17,7 @@ export interface ExtraOptions {
   loadingComponent?: Type<any>;
   errorComponent?: Type<any>;
   timeoutTemplate?: Type<any>;
+  elements?: boolean;
 }
 
 export type ModulesConfig = ModuleConfig[];

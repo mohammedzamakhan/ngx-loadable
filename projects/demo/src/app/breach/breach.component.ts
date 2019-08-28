@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-breach',
@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./breach.component.css']
 })
 export class BreachComponent implements OnInit {
+  @Input() input = 'Default Input';
+  @Output() output = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  update() {
+    this.output.emit();
   }
 
 }

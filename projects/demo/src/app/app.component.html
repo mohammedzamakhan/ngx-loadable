@@ -168,10 +168,11 @@
               </div>
               <div>
                 <ngx-loadable
-                  module="breach"
+                  module="app-breach"
                   [show]="showBreach"
                   #breachModule
                   [timeout]="timeOut"
+                  (init)="initBreachModule($event)"
                 >
                 </ngx-loadable>
               </div>
