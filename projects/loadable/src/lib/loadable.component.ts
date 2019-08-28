@@ -6,20 +6,20 @@ import {
   Injector,
   ViewChild,
   SimpleChanges,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
   OnChanges,
   Output,
-  EventEmitter
+  EventEmitter,
+  Optional,
+  Inject,
+  ElementRef,
+  TemplateRef,
 } from '@angular/core';
-import { LoadableService } from './loadable.service';
+import { LoadableService, LOADABLE_CONFIGURATION } from './loadable.service';
+import { ExtraOptions } from './loadable.config';
 
 @Component({
   selector: 'ngx-loadable',
   template: `
-    <ng-content *ngIf="loading && !timedOut && !error" select="[loading]"></ng-content>
-    <ng-content *ngIf="error" select="[error]"></ng-content>
-    <ng-content *ngIf="timedOut && !error && !loaded" select="[timedOut]"></ng-content>
     <ng-template #content></ng-template>
   `,
   styles: [],
@@ -28,9 +28,13 @@ export class LoadableComponent implements OnChanges {
   @Input() module: string;
   @Input() show = false;
   @Input() timeout: number | undefined;
+  @Input() loadingTemplate: TemplateRef<any>;
+  @Input() errorTemplate: TemplateRef<any>;
+  @Input() timeoutTemplate: TemplateRef<any>;
   @Output() init = new EventEmitter();
 
-  @ViewChild('content', { read: ViewContainerRef, static: true }) vcr: ViewContainerRef;
+  @ViewChild('content', { read: ViewContainerRef, static: true }) content: ViewContainerRef;
+
   private mr: NgModuleRef<any>;
   loading = false;
   loaded = false;
@@ -40,6 +44,8 @@ export class LoadableComponent implements OnChanges {
   constructor(
     private inj: Injector,
     private ls: LoadableService,
+    @Optional() @Inject(LOADABLE_CONFIGURATION) private options: ExtraOptions,
+    private el: ElementRef
   ) {}
 
   public async preload() {
@@ -55,12 +61,16 @@ export class LoadableComponent implements OnChanges {
       return mf;
     } catch (error) {
       this.error = error;
+      this.ls._renderVCR(
+        this.errorTemplate || this.ls.getModule(this.module).errorComponent || this.options.errorComponent,
+        this.content
+      );
       return error;
     }
   }
 
   private _render() {
-    const componentRef = this.ls._renderVCR(this.mr, this.vcr);
+    const componentRef = this.ls._renderVCR(this.mr, this.content);
     this.init.next(componentRef);
     this.loading = false;
   }
@@ -71,18 +81,33 @@ export class LoadableComponent implements OnChanges {
     this.loadFn();
   }
 
+  _renderTimeoutTemplate() {
+    this.timedOut = true;
+    this.ls._renderVCR(
+      this.timeoutTemplate || this.ls.getModule(this.module).timeoutTemplate || this.options.timeoutTemplate,
+      this.content
+    );
+  }
+
   loadFn() {
     if (typeof this.timeout === 'string') {
       this.timeout = parseInt(this.timeout, 10);
     }
     this.loading = true;
+    if (this.options.loadingComponent) {
+      this.ls._renderVCR(
+        this.loadingTemplate || this.ls.getModule(this.module).loadingComponent || this.options.loadingComponent,
+        this.content
+      );
+    }
     if (this.timeout === 0) {
-      this.timedOut = true;
+      this._renderTimeoutTemplate();
     } else if (this.timeout > 0) {
       setTimeout(() => {
-        this.timedOut = true;
+        this._renderTimeoutTemplate();
       }, this.timeout);
     }
+
     this.preload()
       .then((mf) => {
         if (mf instanceof Error) {

@@ -79,32 +79,33 @@
               type="range"
               aria-label="Timeout Slider"
             />
-
+            <ng-template #lazyLoadingTemplate>
+              <div class="notification is-info">
+                Loading...
+              </div>
+            </ng-template>
+            <ng-template #lazyErrorTemplate>
+              <div class="notification is-danger">
+                Error Loading the module!
+              </div>
+            </ng-template>
+            <ng-template #lazyTimeoutTemplate>
+              <div class="notification is-warning">
+                TIMED OUTT!!
+                <button class="button" (click)="lazyModule.reload()">
+                  Retry
+                </button>
+              </div>
+            </ng-template>
             <ngx-loadable
               module="lazy"
               [show]="show"
               #lazyModule
               [timeout]="timeOut"
+              [errorTemplate]="lazyErrorTemplate"
+              [timeoutTemplate]="lazyTimeoutTemplate"
               (init)="lazyInit($event)"
             >
-              <div loading>
-                <div class="notification is-info">
-                  Loading...
-                </div>
-              </div>
-              <div timedOut>
-                <div class="notification is-warning">
-                  TIMED OUTT!!
-                  <button class="button" (click)="lazyModule.reload()">
-                    Retry
-                  </button>
-                </div>
-              </div>
-              <div error>
-                <div class="notification is-danger">
-                  Error Loading the module!
-                </div>
-              </div>
             </ngx-loadable>
           </div>
         </div>
@@ -116,15 +117,21 @@
           </header>
           <div class="card-content">
             <button (click)="showLazyBoy = true" class="button">Show</button>
-            <ngx-loadable module="lazyBoy" [show]="showLazyBoy">
-              <div loading>
-                Loading...
+            <ng-template #lazyBoyLoadingTemplate>
+              Loading...
+            </ng-template>
+            <ng-template #lazyBoyErrorTemplate>
+              <div class="notification is-danger">
+                Error Loading the module!
               </div>
-              <div error>
-                <div class="notification is-danger">
-                  Error Loading the module!
-                </div>
-              </div>
+            </ng-template>
+            <ngx-loadable
+              module="lazyBoy"
+              [show]="showLazyBoy"
+              [loadingTemplate]="lazyBoyLoadingTemplate"
+              [errorTemplate]="lazyBoyErrorTemplate"
+            >
+
             </ngx-loadable>
           </div>
         </div>
@@ -166,24 +173,6 @@
                   #breachModule
                   [timeout]="timeOut"
                 >
-                  <div loading>
-                    <div class="notification is-info">
-                      Loading...
-                    </div>
-                  </div>
-                  <div timedOut>
-                    <div class="notification is-warning">
-                      TIMED OUTT!!
-                      <button class="button" (click)="bottomModule.reload()">
-                        Retry
-                      </button>
-                    </div>
-                  </div>
-                  <div error>
-                    <div class="notification is-danger">
-                      Error Loading the module!
-                    </div>
-                  </div>
                 </ngx-loadable>
               </div>
             </div>
@@ -233,24 +222,6 @@
                 #bottomModule
                 [timeout]="timeOut"
               >
-                <div loading>
-                  <div class="notification is-info">
-                    Loading...
-                  </div>
-                </div>
-                <div timedOut>
-                  <div class="notification is-warning">
-                    TIMED OUTT!!
-                    <button class="button" (click)="bottomModule.reload()">
-                      Retry
-                    </button>
-                  </div>
-                </div>
-                <div error>
-                  <div class="notification is-danger">
-                    Error Loading the module!
-                  </div>
-                </div>
               </ngx-loadable>
             </div>
           </div>
