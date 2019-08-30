@@ -43,6 +43,10 @@ export class AppComponent implements AfterViewInit {
     twttr.widgets.load();
   }
 
+  preloadAll() {
+    this.loadableService.preloadAll();
+  }
+
   load() {
     this.loadableService.preload('lazy')
       .then(() => this.manuallyLoaded = true);
@@ -66,6 +70,15 @@ export class AppComponent implements AfterViewInit {
     lazyComponent.output.subscribe(() => {
       i++;
       lazyComponent.input = 'Updated by AppComponent using Output ' + i;
+    });
+  }
+
+  initBreachModule({instance: breachComponent}) {
+    let i = 0;
+    breachComponent.input = 'Updated by AppComponent using Input';
+    breachComponent.addEventListener('output', () => {
+      i++;
+      breachComponent.input = 'Updated by AppComponent using Output ' + i;
     });
   }
 }

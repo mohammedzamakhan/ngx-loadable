@@ -1,52 +1,76 @@
-import { Injectable, InjectionToken, NgModuleFactory, NgModuleFactoryLoader, ViewContainerRef, NgModuleRef } from '@angular/core';
-import { pascalCase } from './util';
-import { ILoadableConfig } from './loadable.config';
+import {
+  Injectable,
+  InjectionToken,
+  NgModuleFactory,
+  ViewContainerRef,
+  NgModuleRef,
+  Compiler,
+  Type,
+  ComponentFactoryResolver,
+  TemplateRef,
+} from '@angular/core';
+import { ModulesConfig, FunctionReturningPromise, ModuleConfig, ExtraOptions } from './loadable.config';
 
 export const LOADABLE_CONFIG = new InjectionToken<LoadableService>('LOADABLE_CONFIG');
+
+export const LOADABLE_CONFIGURATION = new InjectionToken<ExtraOptions>('LOADABLE_CONFIGURATION');
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoadableService {
-  public appDir = 'src/app/';
-  public fileMappings = {};
-  constructor(private loader: NgModuleFactoryLoader,
-    ) { }
+  public modules: ModulesConfig = [];
+  constructor(
+    private compiler: Compiler,
+    private cfr: ComponentFactoryResolver
+  ) { }
 
-  addConfig(config: ILoadableConfig) {
-    if (config.appDir) {
-      this.appDir = config.appDir;
-    }
-
-    if (config.fileMappings) {
-      this.fileMappings = {
-        ...this.fileMappings,
-        ...config.fileMappings,
-      };
+  addConfig(config: ModulesConfig) {
+    if (config) {
+      this.modules = [
+        ...this.modules,
+        ...config,
+      ];
     }
   }
 
-  getModulePath(module: string) {
-    return this.fileMappings[module] ||
-      `${this.appDir}${module}/${module}.module#${pascalCase(module)}Module`;
+  getModule(module: string): ModuleConfig {
+    const mod = this.modules.find(m => m.name === module);
+    return mod;
   }
 
-  preload(module: string): Promise<NgModuleFactory<any>> {
-    return this.loader
-      .load(this.getModulePath(module));
+  preload(module: string | FunctionReturningPromise): Promise<NgModuleFactory<any>> {
+    if (typeof module === 'string') {
+      module = this.getModule(module).load;
+    }
+    return module().then(Module => this.compiler.compileModuleAsync(Module));
   }
 
-  preloadAll(modules: string[]): Promise<NgModuleFactory<any>[]> {
+  preloadAll(modules?: (string | FunctionReturningPromise)[]): Promise<NgModuleFactory<any>[]> {
+    if (!modules) {
+      modules = this.modules.map(m => m.load);
+    }
     return Promise.all(modules.map(module => {
       return this.preload(module);
     }));
   }
 
-  _renderVCR(mr: NgModuleRef<any>, vcr: ViewContainerRef) {
-    const rootComponent = (mr as any)._bootstrapComponents[0];
-    const factory = mr.componentFactoryResolver.resolveComponentFactory(
-      rootComponent
-    );
+  _renderVCR(mr: NgModuleRef<any> | TemplateRef<any> | Type<any>, vcr: ViewContainerRef) {
+    let factory;
+    if (mr instanceof TemplateRef) {
+      vcr.remove();
+      return vcr.createEmbeddedView(mr);
+    }
+    if (mr instanceof NgModuleRef) {
+      const rootComponent = (mr as any)._bootstrapComponents[0];
+      factory = mr.componentFactoryResolver.resolveComponentFactory(
+        rootComponent
+      );
+    } else {
+      factory = this.cfr.resolveComponentFactory(
+        (mr as Type<any>),
+      );
+    }
     vcr.remove();
     return vcr.createComponent(factory);
   }
