@@ -9,9 +9,10 @@
     "@angular-devkit/core" "9.0.0-next.0"
     rxjs "6.4.0"
 
-"@angular-devkit/build-angular@~0.900.0-next.0":
+"@angular-devkit/build-angular@0.900.0-next.0":
   version "0.900.0-next.0"
   resolved "https://registry.yarnpkg.com/@angular-devkit/build-angular/-/build-angular-0.900.0-next.0.tgz#660a864bb8df0a3cfae7ef73778b72a73e735471"
+  integrity sha512-7piqvRf11He7m40ZLf/+ZCraqAyoSHVmE/nWLM72rKU8fFI8fkmAKUAcF4U0LpQVgg00G2rJot9Cr9uPMD8NZg==
   dependencies:
     "@angular-devkit/architect" "0.900.0-next.0"
     "@angular-devkit/build-optimizer" "0.900.0-next.0"
@@ -69,9 +70,10 @@
     worker-farm "1.7.0"
     worker-plugin "3.1.0"
 
-"@angular-devkit/build-ng-packagr@~0.900.0-next.0":
+"@angular-devkit/build-ng-packagr@0.900.0-next.0":
   version "0.900.0-next.0"
   resolved "https://registry.yarnpkg.com/@angular-devkit/build-ng-packagr/-/build-ng-packagr-0.900.0-next.0.tgz#72b503f4c40d573510156312df1396a362db2d19"
+  integrity sha512-aokZ3fX/DTanMWEG8wiqQg1auVi/8HtwoFrm7nBNCUpdZvfUwvBASn4q9UdrJ6PgGwV9IJ2PvF8kdJhHGD1TFA==
   dependencies:
     "@angular-devkit/architect" "0.900.0-next.0"
     rxjs "6.4.0"
@@ -118,9 +120,10 @@
   dependencies:
     tslib "^1.9.0"
 
-"@angular/cli@~9.0.0-next.0":
+"@angular/cli@9.0.0-next.0":
   version "9.0.0-next.0"
   resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-9.0.0-next.0.tgz#80f03d6bee60f5067486782de9e5182fc92e0418"
+  integrity sha512-OFh2dlHnnxXQXrU5UZZx8qdXZqndMQ3XJ4fM7MQ65GdwLuTm2W5D6ReKCM1x/CBzAg1sbpu//1wxXNoH3tg9Jg==
   dependencies:
     "@angular-devkit/architect" "0.900.0-next.0"
     "@angular-devkit/core" "9.0.0-next.0"
@@ -816,9 +819,10 @@
     tree-kill "1.2.1"
     webpack-sources "1.4.3"
 
-"@ngx-starter-kit/ngx-utils@^0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@ngx-starter-kit/ngx-utils/-/ngx-utils-0.0.4.tgz#81ceecabe92be827f4b2684def15e4d3809d3f48"
+"@ngx-starter-kit/ngx-utils@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@ngx-starter-kit/ngx-utils/-/ngx-utils-0.0.8.tgz#cf54ff20534124a9f25e72130819e93345eb8002"
+  integrity sha512-82kZAja5xUVwUWNRtWpjffrKPRT4uhshv8cFVhamOd+UpprUHNNpLHD5ePhd3WUxivxQDGmfPU2OK9M5Z/Q3jw==
   dependencies:
     tslib "^1.9.0"
 

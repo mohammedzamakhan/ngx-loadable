@@ -203,5 +203,8 @@
       }
     }
   },
-  "defaultProject": "ngx-loadable"
+  "defaultProject": "ngx-loadable",
+  "cli": {
+    "analytics": "8599d747-5464-4516-aae9-7a421d3f37fd"
+  }
 }

@@ -13,7 +13,7 @@ import { ModulesConfig, FunctionReturningPromise, ModuleConfig, ExtraOptions } f
 
 export const LOADABLE_CONFIG = new InjectionToken<LoadableService>('LOADABLE_CONFIG');
 
-export const LOADABLE_CONFIGURATION = new InjectionToken<ExtraOptions>('LOADABLE_CONFIGURATION');
+export const LOADABLE_ROOT_OPTIONS = new InjectionToken<ExtraOptions>('LOADABLE_ROOT_OPTIONS');
 
 @Injectable({
   providedIn: 'root'

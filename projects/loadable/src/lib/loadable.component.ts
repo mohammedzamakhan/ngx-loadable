@@ -14,8 +14,8 @@ import {
   ElementRef,
   TemplateRef,
 } from '@angular/core';
-import { LoadableService, LOADABLE_CONFIGURATION } from './loadable.service';
-import { ExtraOptions } from './loadable.config';
+import { LoadableService, LOADABLE_ROOT_OPTIONS } from './loadable.service';
+import { ILoadableRootOptions } from './loadable.config';
 
 @Component({
   selector: 'ngx-loadable',
@@ -45,7 +45,7 @@ export class LoadableComponent implements OnChanges {
   constructor(
     private inj: Injector,
     private ls: LoadableService,
-    @Optional() @Inject(LOADABLE_CONFIGURATION) private options: ExtraOptions,
+    @Optional() @Inject(LOADABLE_ROOT_OPTIONS) private options: ILoadableRootOptions,
     private el: ElementRef
   ) {}
 
@@ -72,7 +72,7 @@ export class LoadableComponent implements OnChanges {
 
   private _render() {
     const module = this.ls.getModule(this.module);
-    if (this.isElement || module.isElement || this.options.elements) {
+    if (this.isElement || module.isElement || this.options.isElement) {
       const componentInstance = document.createElement(module.name);
       this.init.next({
         instance: componentInstance,
