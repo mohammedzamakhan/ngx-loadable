@@ -1,34 +1,44 @@
-import { Injectable, InjectionToken, NgModuleFactory, NgModuleFactoryLoader, ViewContainerRef, NgModuleRef } from '@angular/core';
-import { pascalCase } from './util';
-import { ILoadableConfig } from './loadable.config';
+import { Injectable, InjectionToken, NgModuleFactory, NgModuleFactoryLoader, ViewContainerRef, NgModuleRef, Type, TemplateRef, ComponentFactoryResolver } from '@angular/core';
 
-export const LOADABLE_CONFIG = new InjectionToken<LoadableService>('LOADABLE_CONFIG');
+import { pascalCase } from './util';
+import { ILoadableConfig, ModuleConfig, ILoadableRootOptions } from './loadable.config';
+
+export const LOADABLE_CONFIG = new InjectionToken<ModuleConfig[]>('LOADABLE_CONFIG');
+export const LOADABLE_ROOT_OPTIONS = new InjectionToken<ILoadableRootOptions>('LOADABLE_ROOT_OPTIONS');
+
+const LOG_PREFIX = 'ngx-loadable';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoadableService {
-  public appDir = 'src/app/';
-  public fileMappings = {};
-  constructor(private loader: NgModuleFactoryLoader,
-    ) { }
+  public modules: ModuleConfig[] = [];
+  constructor(
+    private loader: NgModuleFactoryLoader,
+    private cfr: ComponentFactoryResolver,
+  ) { }
 
-  addConfig(config: ILoadableConfig) {
-    if (config.appDir) {
-      this.appDir = config.appDir;
-    }
+  addConfig(config: ModuleConfig[]) {
+    config.forEach(newModule => {
+      const existingModule = this.getModule(newModule.name);
+      if (existingModule.loadChildren) {
+        console.warn(
+          // tslint:disable-next-line:max-line-length
+          `${LOG_PREFIX} - ModuleConfig with name '${newModule.name}' was previously added, it will not be added multiple times, continue...`
+        );
+      } else {
+        this.modules.push(newModule);
+      }
+    });
+  }
 
-    if (config.fileMappings) {
-      this.fileMappings = {
-        ...this.fileMappings,
-        ...config.fileMappings,
-      };
-    }
+  getModule(module: string): ModuleConfig {
+    return this.modules.find(m => m.name === module) || ({} as ModuleConfig);
   }
 
   getModulePath(module: string) {
-    return this.fileMappings[module] ||
-      `${this.appDir}${module}/${module}.module#${pascalCase(module)}Module`;
+    return this.getModule(module).loadChildren;
   }
 
   preload(module: string): Promise<NgModuleFactory<any>> {
@@ -36,17 +46,34 @@ export class LoadableService {
       .load(this.getModulePath(module));
   }
 
-  preloadAll(modules: string[]): Promise<NgModuleFactory<any>[]> {
+  preloadAll(modules?: string[]): Promise<NgModuleFactory<any>[]> {
+    if (!modules) {
+      modules = this.modules.map(m => m.name);
+    }
     return Promise.all(modules.map(module => {
       return this.preload(module);
     }));
   }
 
-  _renderVCR(mr: NgModuleRef<any>, vcr: ViewContainerRef) {
-    const rootComponent = (mr as any)._bootstrapComponents[0];
-    const factory = mr.componentFactoryResolver.resolveComponentFactory(
-      rootComponent
-    );
+  _renderVCR(mr: NgModuleRef<any> | Type<any> | TemplateRef<any>, vcr: ViewContainerRef) {
+    let factory;
+    if (!mr) {
+      return;
+    }
+    if (mr instanceof TemplateRef) {
+      vcr.remove();
+      return vcr.createEmbeddedView(mr);
+    }
+    if ((mr as NgModuleRef<any>).componentFactoryResolver) {
+      const rootComponent = (mr as any)._bootstrapComponents[0];
+      factory = (mr as NgModuleRef<any>).componentFactoryResolver.resolveComponentFactory(
+        rootComponent
+      );
+    } else {
+      factory = this.cfr.resolveComponentFactory(
+        (mr as Type<any>),
+      );
+    }
     vcr.remove();
     return vcr.createComponent(factory);
   }

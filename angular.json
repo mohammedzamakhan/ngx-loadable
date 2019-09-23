@@ -63,9 +63,7 @@
             "scripts": [],
             "es5BrowserSupport": true,
             "lazyModules": [
-              "projects/demo/src/app/lazy/lazy.module",
-              "projects/demo/src/app/bottom/bottom.module",
-              "projects/demo/src/app/breach/breach.module"
+
             ]
           },
           "configurations": {

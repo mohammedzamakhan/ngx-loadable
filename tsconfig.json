@@ -33,5 +33,8 @@
       ]
     },
     "downlevelIteration": true
+  },
+  "angularCompilerOptions": {
+    "enableIvy": false
   }
 }
