@@ -1,8 +1,10 @@
 import { Type } from '@angular/core';
 
+export type FunctionReturningPromise = () => Promise<any>;
+
 export interface ModuleConfig {
   name: string;
-  loadChildren?: string;
+  loadChildren?: string | FunctionReturningPromise;
   matcher: () => null;
   loadingComponent?: Type<any>;
   errorComponent?: Type<any>;

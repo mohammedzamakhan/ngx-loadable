@@ -27,7 +27,7 @@ import { HomeComponent } from './home/home.component';
     LoadableModule.forRoot({
       moduleConfigs: [{
         name: 'lazy',
-        loadChildren: './lazy/lazy.module#LazyModule',
+        loadChildren: () => import('./lazy/lazy.module').then(mod => mod.LazyModule),
         matcher,
       }, {
         name: 'bottom',

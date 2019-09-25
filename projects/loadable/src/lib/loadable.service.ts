@@ -1,7 +1,7 @@
-import { Injectable, InjectionToken, NgModuleFactory, NgModuleFactoryLoader, ViewContainerRef, NgModuleRef, Type, TemplateRef, ComponentFactoryResolver } from '@angular/core';
+// tslint:disable-next-line:max-line-length
+import { Injectable, InjectionToken, NgModuleFactory, NgModuleFactoryLoader, ViewContainerRef, NgModuleRef, Type, TemplateRef, ComponentFactoryResolver, Compiler } from '@angular/core';
 
-import { pascalCase } from './util';
-import { ILoadableConfig, ModuleConfig, ILoadableRootOptions } from './loadable.config';
+import { ModuleConfig, ILoadableRootOptions } from './loadable.config';
 
 export const LOADABLE_CONFIG = new InjectionToken<ModuleConfig[]>('LOADABLE_CONFIG');
 export const LOADABLE_ROOT_OPTIONS = new InjectionToken<ILoadableRootOptions>('LOADABLE_ROOT_OPTIONS');
@@ -17,6 +17,7 @@ export class LoadableService {
   constructor(
     private loader: NgModuleFactoryLoader,
     private cfr: ComponentFactoryResolver,
+    private compiler: Compiler,
   ) { }
 
   addConfig(config: ModuleConfig[]) {
@@ -42,8 +43,19 @@ export class LoadableService {
   }
 
   preload(module: string): Promise<NgModuleFactory<any>> {
-    return this.loader
-      .load(this.getModulePath(module));
+    const loadChildren = this.getModulePath(module);
+    if (typeof loadChildren === 'string') {
+      return this.loader
+        .load(loadChildren);
+    } else {
+      return loadChildren().then((t: any) => {
+        if (t instanceof NgModuleFactory) {
+          return t;
+        } else {
+          return this.compiler.compileModuleAsync(t);
+        }
+      });
+    }
   }
 
   preloadAll(modules?: string[]): Promise<NgModuleFactory<any>[]> {
