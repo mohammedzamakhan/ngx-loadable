@@ -1,0 +1,90 @@
+<div class="intro">
+  <mat-icon
+    inline
+    svgIcon="logo"
+    aria-hidden="false"
+    aria-label="ngx-loadable"
+  ></mat-icon>
+  <h1>ngx-loadable</h1>
+  <h3>
+    The easiest way to code split on Component level
+    <br />
+    in your Angular application!
+  </h3>
+</div>
+
+<div class="cta">
+  <button mat-flat-button color="accent" routerLink="../docs/getting-started">
+    Get started
+  </button>
+  <button mat-flat-button color="primary" routerLink="../docs/how-it-works">
+    Learn more
+  </button>
+  <button mat-flat-button color="warn" routerLink="../examples">
+    Explore examples
+  </button>
+</div>
+
+<div class="cta">
+  <a
+    mat-stroked-button
+    href="https://medium.com/@zamamohammed/announcing-angular-loadable-ngx-loadable-2-2kb-4ef7e6321784"
+    target="_blank"
+  >
+    <mat-icon>book</mat-icon> Read blog post
+  </a>
+  <a
+    mat-stroked-button
+    href="#"
+    target="_blank"
+  >
+    <mat-icon>play_circle_outline</mat-icon> Watch presentation
+  </a>
+  <!-- <a
+    mat-stroked-button
+    href="https://devchat.tv/adv-in-angular/aia-257-the-easiest-way-to-use-angular-elements-with-tomas-trajan/"
+    target="_blank"
+  >
+    <mat-icon>audiotrack</mat-icon> Listen to podcast
+  </a> -->
+</div>
+
+<h2>Quickstart</h2>
+<ol>
+  <li>
+    Install <code color="accent">npm i ngx-loadable</code>
+  </li>
+  <li>
+    Add
+    <code>
+      import &#123; LoadableModule } from 'ngx-loadable';
+    </code>
+  </li>
+  <li>
+    Append <code>LoadableMoudule</code> to the <code>imports: []</code> of
+    your
+    <code>AppModule</code>
+  </li>
+  <li>
+    Create a component using <code>ng generate ngx-loadable:module lazy</code>
+  </li>
+  <li>
+    Use <code>ngx-loadable</code> component to load the lazy component
+    <pre [highlight]="codeExampleComponent"></pre>
+  </li>
+</ol>
+
+<h2>Features</h2>
+<mat-grid-list [cols]="columnCount | async" rowHeight="150">
+  <mat-grid-tile *ngFor="let feature of features">
+    <mat-card>
+      <mat-card-header>
+        <div mat-card-avatar>
+          <mat-icon color="primary">{{ feature.icon }}</mat-icon>
+        </div>
+        <mat-card-title>{{ feature.title }}</mat-card-title>
+        <mat-card-subtitle [innerHTML]="feature.subtitle"></mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

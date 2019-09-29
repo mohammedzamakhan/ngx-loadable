@@ -1,84 +1,66 @@
-import { Component, ViewChild, AfterViewInit, ComponentRef } from '@angular/core';
-import { LoadableService, LoadableComponent } from 'ngx-loadable';
-import { LazyComponent } from './lazy/lazy.component';
+import { MatSidenav } from '@angular/material';
+import { Component, OnInit, ViewChild, HostBinding } from '@angular/core';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { delay, map, tap } from 'rxjs/operators';
+
+import { ResponsiveLayoutService } from './core/layout/responsive-layout.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements AfterViewInit {
-  title = 'demo';
-  show = false;
-  showBottom = false;
-  showLazyBoy = false;
-  manuallyLoaded = false;
-  timeOut = 100;
-  obj = {
-    string: 'Input'
-  };
-  @ViewChild('lazyModule', { static: true }) lazyModule: LoadableComponent;
-  @ViewChild('bottomModule', { static: true }) bottomModule: LoadableComponent;
-  @ViewChild('breachModule', { static: true }) breachModule: LoadableComponent;
-  showBreach: boolean;
+export class AppComponent implements OnInit {
+  @HostBinding('class')
+  demoRootCssClass = '';
 
-  get isLoaded() {
-    return this.lazyModule.loaded || this.manuallyLoaded;
+  @ViewChild('sidenav', { static: false }) sidenav: MatSidenav;
+
+  navOpened: Observable<boolean>;
+  navToggled = new BehaviorSubject(false);
+  isSmallOrSmaller: Observable<boolean>;
+  sidenavMode: Observable<string>;
+
+  constructor(
+    private responsiveLayoutService: ResponsiveLayoutService,
+  ) {}
+
+  ngOnInit() {
+
+    this.isSmallOrSmaller = combineLatest(
+      this.responsiveLayoutService.isSmallOrSmaller,
+      this.responsiveLayoutService.isLargeOrBigger
+    ).pipe(
+      delay(1),
+      tap(([isSmall, isLarge]) => {
+        this.demoRootCssClass = '';
+        if (isSmall) {
+          this.demoRootCssClass = 'responsive';
+        }
+        if (isLarge) {
+          this.demoRootCssClass = 'responsive-large';
+        }
+      }),
+      map(([isSmall]) => isSmall)
+    );
+
+    this.navOpened = combineLatest([
+      this.isSmallOrSmaller,
+      this.navToggled
+    ]).pipe(
+      map(([isSmallScreen, navToggled]) => (!isSmallScreen ? true : navToggled))
+    );
+
+    this.sidenavMode = this.isSmallOrSmaller.pipe(
+      map(isSmallOrSmaller => (isSmallOrSmaller ? 'push' : 'side'))
+    );
   }
 
-  get isBottomLoaded() {
-    return this.bottomModule.loaded;
+  onNavToggle() {
+    this.navToggled.next(!this.navToggled.value);
   }
 
-  get isBreachLoaded() {
-    return this.breachModule.loaded;
-  }
-
-  constructor(private loadableService: LoadableService) {
-
-  }
-
-  ngAfterViewInit(): void {
-    // @ts-ignore
-    twttr.widgets.load();
-  }
-
-  preloadAll() {
-    this.loadableService.preloadAll();
-  }
-
-  load() {
-    this.loadableService.preload('lazy')
-      .then(() => this.manuallyLoaded = true);
-  }
-
-  loadBottomModule(event) {
-    if (event.intersectionRatio >= 0.5) {
-      console.log('show bottom');
-      this.showBottom = true;
-    }
-  }
-
-  loadBreachModule() {
-    this.showBreach = true;
-  }
-
-  lazyInit({instance: lazyComponent}: ComponentRef<LazyComponent>) {
-    let i = 0;
-    lazyComponent.input = 'Updated by AppComponent using Input';
-
-    lazyComponent.output.subscribe(() => {
-      i++;
-      lazyComponent.input = 'Updated by AppComponent using Output ' + i;
-    });
-  }
-
-  initBreachModule({instance: breachComponent}) {
-    let i = 0;
-    breachComponent.input = 'Updated by AppComponent using Input';
-    breachComponent.addEventListener('output', () => {
-      i++;
-      breachComponent.input = 'Updated by AppComponent using Output ' + i;
-    });
+  onBackdropClick() {
+    this.navToggled.next(false);
   }
 }

@@ -1,4 +1,5 @@
 # ngx-loadable
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 
 [![npm](https://badgen.net/npm/v/ngx-loadable)](https://www.npmjs.com/package/ngx-loadable) [![license](https://img.shields.io/github/license/mohammedzamakhan/ngx-loadable.svg)](https://github.com/mohammedzamakhan/ngx-loadable/master/LICENSE) [![size](https://badgen.net/bundlephobia/minzip/ngx-loadable)](https://bundlephobia.com/result?p=ngx-loadable)
 
@@ -98,3 +99,22 @@ Please contribute by creating issues/PRs
 ## License
 
 [© 2019 ngx-loadable. All Rights Reserved.](../LICENSE)
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://www.linkedin.com/in/mohammedzamakhan"><img src="https://avatars3.githubusercontent.com/u/2327532?v=4" width="100px;" alt="Zama Khan Mohammed"/><br /><sub><b>Zama Khan Mohammed</b></sub></a><br /><a href="https://github.com/Zama Khan Mohammed/ngx-loadable/commits?author=mohammedzamakhan" title="Documentation">📖</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

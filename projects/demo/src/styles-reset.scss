@@ -1,0 +1,66 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+ul,
+ol {
+  list-style-position: inside;
+  line-height: 2em;
+}
+
+code {
+  white-space: nowrap;
+  border-radius: 10px;
+  padding: 0 8px 1px 8px;
+  margin: 0 5px;
+}
+
+pre {
+  border-radius: 10px;
+  padding: 20px !important;
+  margin: 0 0 20px 0;
+}
+
+p {
+  line-height: 2em;
+}
+
+a {
+  text-decoration: none;
+}
+
+blockquote {
+  font-style: italic;
+  padding: 10px 20px;
+  border-left: 2px solid;
+  margin: 20px 0;
+
+  &.large {
+    font-style: normal;
+    border: 0;
+    font-size: 2em;
+    line-height: 1.6em;
+    padding: 10px 80px;
+  }
+}
+
+.responsive {
+  blockquote {
+    &.large {
+      font-size: 1.6em;
+      padding: 10px 20px;
+    }
+  }
+}
+
+// CUSTOMIZE CONSUMED WEB COMPONENTS
+ion-picker {
+  position: fixed !important;
+}

@@ -1,0 +1,23 @@
+:host {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  .signature {
+    flex: 1 0 auto;
+
+    img {
+      border-radius: 50%;
+      height: 36px;
+    }
+  }
+}
+
+:host-context(.responsive) {
+  .signature {
+    span {
+      display: none;
+    }
+  }
+}

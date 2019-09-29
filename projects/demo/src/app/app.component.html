@@ -1,4 +1,4 @@
-<section class="hero is-light">
+<!-- <section class="hero is-light">
   <div class="hero-body">
     <div class="container" style="display: flex;">
       <div style="flex: 1">
@@ -232,4 +232,25 @@
   </div>
 
 
-</div>
+</div> -->
+
+<demo-toolbar
+  (toggle)="onNavToggle()"
+  [navOpened]="navOpened | async"
+></demo-toolbar>
+<mat-sidenav-container
+  [hasBackdrop]="isSmallOrSmaller | async"
+  (backdropClick)="onBackdropClick()"
+>
+  <mat-sidenav
+    [mode]="sidenavMode | async"
+    [opened]="navOpened | async"
+    disableClose
+  >
+    <demo-navigation></demo-navigation>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<demo-footer></demo-footer>
