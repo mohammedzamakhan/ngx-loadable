@@ -1,6 +1,6 @@
 {
   "projectName": "ngx-loadable",
-  "projectOwner": "Zama Khan Mohammed",
+  "projectOwner": "mohammedzamakhan",
   "repoType": "github",
   "repoHost": "https://github.com",
   "files": [
@@ -16,7 +16,12 @@
       "avatar_url": "https://avatars3.githubusercontent.com/u/2327532?v=4",
       "profile": "https://www.linkedin.com/in/mohammedzamakhan",
       "contributions": [
-        "doc"
+        "code",
+        "design",
+        "example",
+        "doc",
+        "ideas",
+        "infra"
       ]
     }
   ],
