@@ -115,6 +115,9 @@ function buildRoute(options: ModuleOptions, modulePath: string) {
   const moduleName = `${strings.classify(options.name)}Module`;
   const loadChildren = `() => import('${relativeModulePath}').then(m => m.${moduleName})`;
 
+  if (options.element) {
+    return `{ name: '${options.name}', load: ${loadChildren}, isElement: true }`;
+  }
   return `{ name: '${options.name}', load: ${loadChildren} }`;
 }
 

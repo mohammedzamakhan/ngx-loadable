@@ -23,6 +23,17 @@
         "ideas",
         "infra"
       ]
+    },
+    {
+      "login": "rumanhassan",
+      "name": "rumanhassan",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/7890944?v=4",
+      "profile": "https://github.com/rumanhassan",
+      "contributions": [
+        "ideas",
+        "code",
+        "tool"
+      ]
     }
   ],
   "contributorsPerLine": 7

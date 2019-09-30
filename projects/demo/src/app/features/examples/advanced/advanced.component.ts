@@ -35,13 +35,13 @@ export class AdvancedComponent implements OnInit {
     this.counter++;
   }
 
-  // preload() {
-  //   this.lazyElementLoaderService.preload();
-  // }
+  preload() {
+    // this.lazyElementLoaderService.preload();
+  }
 
-  // preloadFab() {
-  //   this.lazyElementLoaderService.preload(['mwc-fab']);
-  // }
+  preloadFab() {
+    // this.lazyElementLoaderService.preload(['mwc-fab']);
+  }
 }
 
 const CODE_EXAMPLE_1_MODULE = `// pre-configured LoadableModule
@@ -70,12 +70,12 @@ export class FeatureModule { }
 const CODE_EXAMPLE_1_HTML = `<!-- No need to specify loading template or error template -->
 <ngx-loadable module="lazy" [show]="true"></ngx-loadable>`;
 
-const CODE_EXAMPLE_2_MODULE = `// pre-configured LazyElementsModule in FeatureModule
-const options: LazyElementModuleOptions = {
+const CODE_EXAMPLE_2_MODULE = `// pre-configured LoadableModule in FeatureModule
+const options: LoadableModuleOptions = {
   elementConfigs: [
     {
-      tag: 'mwc-checkbox',
-      url: 'https://unpkg.com/@material/mwc-checkbox@0.6.0/mwc-checkbox.js?module'
+      name: 'lazy',
+      load: () => import('./lazy/lazy.module').then(mod => mod.LazyModule)
     }
   ]
 };
@@ -84,22 +84,24 @@ const options: LazyElementModuleOptions = {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [FeatureComponent],
   imports: [
-    LazyElementsModule.forFeature(options),
+    LoadableModule.forFeature(options),
   ]
 })
 export class FeatureModule { }
 `;
 
-const CODE_EXAMPLE_2_HTML = `<!-- We have to specify null; url to be able to pass in additional options -->
-<mwc-checkbox *axLazyElement="null; module: true; loadingTemplate: loading;"></mwc-checkbox>`;
+const CODE_EXAMPLE_2_HTML = `<!-- We have to specify module and pass to be able to pass in additional options -->
+<ngx-loadable module="lazy" [isElement]="true">
+  <ng-template #loading>Loading...</ng-template>
+</ngx-loadable>`;
 
-const CODE_EXAMPLE_3_MODULE = `// pre-configured LazyElementsModule
-const options: LazyElementModuleOptions = {
+const CODE_EXAMPLE_3_MODULE = `// pre-configured LoadableModule
+const options: LoadableModuleOptions = {
   elementConfigs: [
     {
-      tag: 'mwc-switch',
-      url: 'https://unpkg.com/@material/mwc-switch@0.6.0/mwc-switch.js?module',
-      isModule: true
+      name: 'lazy',
+      url: () => import('./lazy/lazy.module').then(mod => mod.LazyModule),
+      isElement: true
     }
   ]
 };
@@ -108,29 +110,31 @@ const options: LazyElementModuleOptions = {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [FeatureComponent],
   imports: [
-    LazyElementsModule.forFeature(options),
+    LoadablesModule.forFeature(options),
   ]
 })
 export class FeatureModule { }
 `;
 
-const CODE_EXAMPLE_3_HTML = `<!-- We have to specify null; url to be able to pass in additional options -->
-<mwc-switch *axLazyElement="null; loadingTemplate: loading;"></mwc-switch>`;
+const CODE_EXAMPLE_3_HTML = `<!-- We have to specify module to be able to pass in additional options -->
+<ngx-loadable module="lazy" [isElement]="true">
+  <ng-template #loading>Loading...</ng-template>
+</ngx-loadable>`;
 
 const CODE_EXAMPLE_4_HTML = `<!-- This can be used in any place in the whole application -->
 <mwc-fab icon="code" *axLazyElement></mwc-fab>`;
 
-const CODE_EXAMPLE_4_CORE_MODULE = `// pre-configured LazyElementsModule in CoreModule or AppModule
-const options: LazyElementModuleRootOptions = {
+const CODE_EXAMPLE_4_CORE_MODULE = `// pre-configured LoadableModule in CoreModule or AppModule
+const options: LoadableModuleRootOptions = {
   rootOptions: {
     errorComponent: RootErrorComponent
     loadingComponent: RootSpinnerComponent
-    isModule: true
+    isElement: true
   },
   elementConfigs: [
     {
-      tag: 'mwc-switch',
-      url: 'https://unpkg.com/@material/mwc-switch@0.6.0/mwc-switch.js?module'
+      name: 'lazy',
+      load: () => import('./lazy/lazy.module').then(mod => mod.LazyModule),
     }
   ]
 };
@@ -138,7 +142,7 @@ const options: LazyElementModuleRootOptions = {
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
-    LazyElementsModule.forRoot(options),
+    LoadableModule.forRoot(options),
   ]
 })
 export class CoreModule { }
@@ -148,14 +152,14 @@ const CODE_EXAMPLE_5_HTML = `<button (click)="preload()">Preload</button>`;
 
 const CODE_EXAMPLE_5_TS = `
 class PageComponent {
-  constructor(private lazyElementLoaderService: LazyElementLoaderService) {}
+  constructor(private loadableService: LoadableService) {}
 
   preload() {
-    this.lazyElementLoaderService.preload();
+    this.loadableService.preloadAll();
   }
 
   preloadFab() {
-    this.lazyElementLoaderService.preload(['mwc-fab']);
+    this.loadableService.preloadAll(['lazy']);
   }
 }
 `;

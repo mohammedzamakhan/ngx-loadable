@@ -64,6 +64,10 @@
       "default": false,
       "description": "When true, applies lint fixes after generating the module.",
       "x-user-analytics": 15
+    },
+    "element": {
+      "type": "string",
+      "description": "When defined, the component will be created as an Angualr element"
     }
   },
   "required": [

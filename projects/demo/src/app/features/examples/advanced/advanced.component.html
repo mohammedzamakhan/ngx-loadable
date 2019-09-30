@@ -4,14 +4,12 @@
   <h2>Elements configured in a feature module</h2>
   <div class="content">
     <div class="implementation" *ngIf="!example1">
-      <button mat-flat-button color="accent" (click)="example1 = true">
+      <button mat-flat-button color="primary" (click)="example1 = true">
         <mat-icon>play_arrow</mat-icon>
-        Run
+        Show
       </button>
     </div>
-    <div class="implementation" *ngIf="example1">
-      <!-- <ion-button *axLazyElement (click)="increment()">Click me</ion-button> -->
-      <p>Counter: {{ counter }}</p>
+    <div [class.implementation]="example1">
     </div>
     <div class="description">
       <p>
@@ -29,17 +27,13 @@
   <h2>Elements configured in a feature module with HTML inline options</h2>
   <div class="content">
     <div class="implementation" *ngIf="!example2">
-      <button mat-flat-button color="accent" (click)="example2 = true">
+      <button mat-flat-button color="primary" (click)="example2 = true">
         <mat-icon>play_arrow</mat-icon>
-        Run
+        Show
       </button>
     </div>
-    <div class="implementation" *ngIf="example2">
-      <ng-template #loading>Loading...</ng-template>
-      <!-- <mwc-checkbox
-        *axLazyElement="null; module: true; loadingTemplate: loading"
-        >Click me</mwc-checkbox
-      > -->
+    <div [class.implementation]="example2">
+
     </div>
     <div class="description">
       <p>
@@ -59,16 +53,13 @@
   </h2>
   <div class="content">
     <div class="implementation" *ngIf="!example3">
-      <button mat-flat-button color="accent" (click)="example3 = true">
+      <button mat-flat-button color="primary" (click)="example3 = true">
         <mat-icon>play_arrow</mat-icon>
-        Run
+        Show
       </button>
     </div>
-    <div class="implementation" *ngIf="example3">
-      <ng-template #loading>Loading...</ng-template>
-      <!-- <mwc-switch *axLazyElement="null; loadingTemplate: loading">
-        Click me</mwc-switch
-      > -->
+    <div [class.implementation]="example3">
+
     </div>
     <div class="description">
       <p>
@@ -87,13 +78,12 @@
   </h2>
   <div class="content">
     <div class="implementation" *ngIf="!example4">
-      <button mat-flat-button color="accent" (click)="example4 = true">
+      <button mat-flat-button color="primary" (click)="example4 = true">
         <mat-icon>play_arrow</mat-icon>
-        Run
+        Show
       </button>
     </div>
-    <div class="implementation" *ngIf="example4">
-      <!-- <mwc-fab icon="code" *axLazyElement></mwc-fab> -->
+    <div [class.implementation]="example4">
     </div>
     <div class="description">
       <p>
@@ -114,15 +104,15 @@
   <h2>
     Preloading
   </h2>
-  <!-- <div class="content">
+  <div class="content">
     <div class="implementation">
-      <button mat-flat-button color="accent" (click)="preload()">
+      <button mat-flat-button color="primary" (click)="preload()">
         Preload
       </button>
       <button
         class="additional-btn"
         mat-flat-button
-        color="accent"
+        color="primary"
         (click)="preloadFab()"
       >
         Preload Fab
@@ -137,5 +127,5 @@
       <pre [highlight]="codeExample5html"></pre>
       <pre [highlight]="codeExample5ts"></pre>
     </div>
-  </div> -->
+  </div>
 </div>
