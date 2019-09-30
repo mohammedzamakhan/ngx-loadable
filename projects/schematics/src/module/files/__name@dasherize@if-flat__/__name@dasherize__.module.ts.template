@@ -1,0 +1,11 @@
+import { NgModule } from '@angular/core';<% if (commonModule) { %>
+import { CommonModule } from '@angular/common';<% } %>
+
+@NgModule({
+  declarations: [],
+  bootstrap: [<%= classify(name) %>Component],
+  imports: [<% if (commonModule) { %>
+    CommonModule<%= routing || lazyRouteWithRouteModule ? ',' : '' %><% } %>
+  ]
+})
+export class <%= classify(name) %>Module { }

@@ -1,0 +1,17 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "component": {
+      "aliases": [ "c" ],
+      "factory": "./component",
+      "description": "Create an Angular component.",
+      "schema": "./component/schema.json"
+    },
+    "module": {
+      "aliases": [ "m" ],
+      "factory": "./module",
+      "description": "Create an Angular module.",
+      "schema": "./module/schema.json"
+    }
+  }
+}

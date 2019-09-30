@@ -4,6 +4,7 @@
   "description": "ngx-loadable: Simpler Lazy Loading Non Routable Angular Modules",
   "keywords" :["Angular", "Lazy Loading", "Library"],
   "license" : "MIT",
+  "schematics": "schematics/collection.json",
   "repository": {
     "type" : "git",
     "url" : "https://github.com/mohammedzamakhan/ngx-loadable"
