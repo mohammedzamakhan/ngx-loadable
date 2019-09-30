@@ -13,6 +13,7 @@ import {
   Inject,
   ElementRef,
   TemplateRef,
+  ContentChild,
 } from '@angular/core';
 import { LoadableService, LOADABLE_ROOT_OPTIONS } from './loadable.service';
 import { ILoadableRootOptions } from './loadable.config';
@@ -28,14 +29,13 @@ export class LoadableComponent implements OnChanges {
   @Input() module: string;
   @Input() show = false;
   @Input() timeout: number | undefined;
-  @Input() loadingTemplate: TemplateRef<any>;
-  @Input() errorTemplate: TemplateRef<any>;
-  @Input() timeoutTemplate: TemplateRef<any>;
   @Input() isElement = false;
   @Output() init = new EventEmitter();
 
   @ViewChild('content', { read: ViewContainerRef, static: true }) content: ViewContainerRef;
-
+  @ContentChild('loading', { read: TemplateRef, static: false }) loadingTemplate: TemplateRef<any>;
+  @ContentChild('error', { read: TemplateRef, static: false }) errorTemplate: TemplateRef<any>;
+  @ContentChild('timedOut', { read: TemplateRef, static: false }) timeoutTemplate: TemplateRef<any>;
   private mr: NgModuleRef<any>;
   loading = false;
   loaded = false;
@@ -62,8 +62,9 @@ export class LoadableComponent implements OnChanges {
       return mf;
     } catch (error) {
       this.error = error;
+      const module = this.ls.getModule(this.module);
       this.ls._renderVCR(
-        this.errorTemplate || this.ls.getModule(this.module).errorComponent || this.options.errorComponent,
+        this.errorTemplate || (module && module.errorComponent) || (this.options && this.options.errorComponent),
         this.content
       );
       return error;
@@ -72,7 +73,7 @@ export class LoadableComponent implements OnChanges {
 
   private _render() {
     const module = this.ls.getModule(this.module);
-    if (this.isElement || module.isElement || this.options.isElement) {
+    if (this.isElement || (module && module.isElement) || (this.options && this.options.isElement)) {
       const componentInstance = document.createElement(module.name);
       this.init.next({
         instance: componentInstance,
@@ -94,8 +95,9 @@ export class LoadableComponent implements OnChanges {
 
   _renderTimeoutTemplate() {
     this.timedOut = true;
+    const module = this.ls.getModule(this.module);
     this.ls._renderVCR(
-      this.timeoutTemplate || this.ls.getModule(this.module).timeoutTemplate || this.options.timeoutTemplate,
+      this.timeoutTemplate || (module && module.timeoutTemplate) || (this.options && this.options.timeoutTemplate),
       this.content
     );
   }
@@ -105,12 +107,12 @@ export class LoadableComponent implements OnChanges {
       this.timeout = parseInt(this.timeout, 10);
     }
     this.loading = true;
-    if (this.options.loadingComponent) {
-      this.ls._renderVCR(
-        this.loadingTemplate || this.ls.getModule(this.module).loadingComponent || this.options.loadingComponent,
-        this.content
-      );
-    }
+    const module = this.ls.getModule(this.module);
+    this.ls._renderVCR(
+      this.loadingTemplate || (module && module.loadingComponent) || (this.options && this.options.loadingComponent),
+      this.content
+    );
+
     if (this.timeout === 0) {
       this._renderTimeoutTemplate();
     } else if (this.timeout > 0) {

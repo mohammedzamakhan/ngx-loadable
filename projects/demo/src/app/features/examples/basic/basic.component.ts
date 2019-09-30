@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./basic.component.scss']
 })
 export class BasicComponent implements OnInit {
+
+  constructor() {}
   // example toggles
   example1 = false;
   example2 = false;
@@ -24,8 +26,6 @@ export class BasicComponent implements OnInit {
   counter = 0;
   customYearValues = [2020, 2030, 2040];
 
-  constructor() {}
-
   ngOnInit() {}
 
   increment() {
@@ -33,23 +33,15 @@ export class BasicComponent implements OnInit {
   }
 }
 
-const CODE_EXAMPLE_1 = `<!-- url = 'https://unpkg.com/@material/mwc-icon@0.6.0/mwc-icon.js?module'; -->
-<mwc-icon *axLazyElement="url; module: true">
-  favorite
-</mwc-icon>`;
+const CODE_EXAMPLE_1 = `<ngx-loadable module="lazy" [show]="show"></ngx-loadable>`;
 
-const CODE_EXAMPLE_2 = `<!-- url = 'https://unpkg.com/@material/mwc-button@0.6.0/mwc-button.js?module' -->;
-<ng-template #loading>Loading...</ng-template>
-<mwc-button *axLazyElement="url; loadingTemplate: loading; module: true"
-            (click)="increment()">
-  Increment
-</mwc-button>`;
+const CODE_EXAMPLE_2 = `<ngx-loadable module="lazy" [show]="show">
+  <ng-template #loading>Loading...</ng-template>
+</ngx-loadable>`;
 
-const CODE_EXAMPLE_3 = `<!-- url = 'https://unpkg.com/wrong-url.js?module' -->;
-<ng-template #error>Loading failed...</ng-template>
-<mwc-button *axLazyElement="url; errorTemplate: error; module: true">
-  Submit
-</mwc-button>`;
+const CODE_EXAMPLE_3 = `<ngx-loadable module="error" [show]="show">
+  <ng-template #error>Loading failed...</ng-template>
+</ngx-loadable>`;
 
 const CODE_EXAMPLE_4 = `<!-- url = 'https://unpkg.com/@ionic/core@4.6.2/dist/ionic/ionic.js' -->;
 <!-- customYearValues = [2020, 2030, 2040] -->;

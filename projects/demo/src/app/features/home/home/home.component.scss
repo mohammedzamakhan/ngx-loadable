@@ -31,10 +31,17 @@
     }
 
     h3 {
-      font-size: 1.8em;
+      font-size: 1.2em;
       line-height: 1.3em;
       opacity: .75;
       margin: 0;
+    }
+
+    @media screen and (min-width: 635px) {
+      h3 {
+        font-size: 1.8em;
+        width: 500px;
+      }
     }
 
     mat-icon {
@@ -73,7 +80,7 @@
     mat-grid-tile {
       mat-card {
         width: calc(100% - 50px);
-        height: calc(100% - 10px);
+        height: calc(100% - 50px);
 
         mat-card-title {
           white-space: nowrap;
