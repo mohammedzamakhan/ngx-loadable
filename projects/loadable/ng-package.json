@@ -3,5 +3,6 @@
   "dest": "../../dist/loadable",
   "lib": {
     "entryFile": "src/public_api.ts"
-  }
+  },
+  "whitelistedNonPeerDependencies": ["."]
 }

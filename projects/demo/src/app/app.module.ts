@@ -48,7 +48,8 @@ import { ErrorComponent } from './shared/error/error.component';
         errorComponent: ErrorComponent,
         preload: true,
       },
-        { name: 'expansion', load: () => import('./expansion/expansion.module').then(m => m.ExpansionModule) }],
+        { name: 'expansion', load: () => import('./expansion/expansion.module').then(m => m.ExpansionModule) },
+        { name: 'lazy-test', load: () => import('./lazy-test/lazy-test.module').then(m => m.LazyTestModule) }],
       rootOptions: {
         loadingComponent: LoaderComponent,
       }

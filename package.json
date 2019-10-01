@@ -1,13 +1,13 @@
 {
   "name": "ngx-loadable",
-  "version": "3.0.0-alpha.4",
+  "version": "3.0.0-next.10",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --project demo -o",
     "start:prod": "npm run build && node ./projects/demo-server/server.js",
     "build": "ng build loadable && ng build --project demo --prod && npm run schematics:build",
     "schematics:build:ts": "tsc -p ./projects/schematics/tsconfig.json",
-    "schematics:build:collection": "cpy --parents --cwd='projects/schematics/src/' '**/*.json' '**/*.js' '**/*.js.*' ../../../dist/loadable/schematics",
+    "schematics:build:collection": "cpy --parents --cwd='projects/schematics/src/' '**/*.json' '**/*.js' '**/*.js.*' '**/*.template' ../../../dist/loadable/schematics",
     "schematics:build": "npm run schematics:build:ts && npm run schematics:build:collection",
     "test": "ng test",
     "lint": "ng lint",
@@ -18,7 +18,7 @@
     "copy-license": "cpy 'LICENSE' dist/loadable",
     "copy-readme": "cpy 'README.md' dist/loadable",
     "copy-files": "npm run copy-license && npm run copy-readme",
-    "package": "npm run build:lib && npm run copy-files && npm run npm_pack"
+    "package": "npm run build:lib && npm run schematics:build && npm run copy-files && npm run npm_pack"
   },
   "private": true,
   "dependencies": {
