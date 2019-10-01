@@ -1,5 +1,5 @@
 # ngx-loadable
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 
 [![npm](https://badgen.net/npm/v/ngx-loadable)](https://www.npmjs.com/package/ngx-loadable) [![license](https://img.shields.io/github/license/mohammedzamakhan/ngx-loadable.svg)](https://github.com/mohammedzamakhan/ngx-loadable/master/LICENSE) [![size](https://badgen.net/bundlephobia/minzip/ngx-loadable)](https://bundlephobia.com/result?p=ngx-loadable)
 
@@ -110,6 +110,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://www.linkedin.com/in/mohammedzamakhan"><img src="https://avatars3.githubusercontent.com/u/2327532?v=4" width="100px;" alt="Zama Khan Mohammed"/><br /><sub><b>Zama Khan Mohammed</b></sub></a><br /><a href="https://github.com/mohammedzamakhan/ngx-loadable/commits?author=mohammedzamakhan" title="Code">💻</a> <a href="#design-mohammedzamakhan" title="Design">🎨</a> <a href="#example-mohammedzamakhan" title="Examples">💡</a> <a href="https://github.com/mohammedzamakhan/ngx-loadable/commits?author=mohammedzamakhan" title="Documentation">📖</a> <a href="#ideas-mohammedzamakhan" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-mohammedzamakhan" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+    <td align="center"><a href="https://github.com/rumanhassan"><img src="https://avatars2.githubusercontent.com/u/7890944?v=4" width="100px;" alt="rumanhassan"/><br /><sub><b>rumanhassan</b></sub></a><br /><a href="#ideas-rumanhassan" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/mohammedzamakhan/ngx-loadable/commits?author=rumanhassan" title="Code">💻</a> <a href="#tool-rumanhassan" title="Tools">🔧</a></td>
   </tr>
 </table>
 

@@ -1,11 +1,18 @@
-import { NgModule } from '@angular/core';<% if (commonModule) { %>
+import { NgModule<% if(element) { %>, Injector<% }%> } from '@angular/core';<% if (commonModule) { %>
 import { CommonModule } from '@angular/common';<% } %>
+<% if(element) { %>import { createCustomElement } from '@angular/elements';<% }%>
 
 @NgModule({
-  declarations: [],
-  bootstrap: [<%= classify(name) %>Component],
+  declarations: [],<% if(!element) { %>
+  bootstrap: [<%= classify(name) %>Component],<% }%>
   imports: [<% if (commonModule) { %>
     CommonModule<%= routing || lazyRouteWithRouteModule ? ',' : '' %><% } %>
   ]
 })
-export class <%= classify(name) %>Module { }
+<% if(!element) { %>export class <%= classify(name) %>Module { } <% }%><% if(element) { %>export class <%= classify(name) %>Module {
+  constructor(injector: Injector) {
+    const el = createCustomElement(<%= classify(name) %>Component, {injector});
+    customElements.define('<%= selector %>', el);
+  }
+}
+<% }%>

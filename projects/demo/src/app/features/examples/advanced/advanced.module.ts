@@ -5,12 +5,11 @@ import { LoadableModule } from 'ngx-loadable';
 
 import { SharedModule } from '../../../shared/shared.module';
 
-import { BasicRoutingModule } from './basic-routing.module';
-import { BasicComponent } from './basic.component';
+import { AdvancedRoutingModule } from './advanced-routing.module';
+import { AdvancedComponent } from './advanced.component';
 
 @NgModule({
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  declarations: [BasicComponent],
+  declarations: [AdvancedComponent],
   imports: [
     HighlightModule,
     LoadableModule.forRoot({
@@ -29,7 +28,7 @@ import { BasicComponent } from './basic.component';
       ]
     }),
     SharedModule,
-    BasicRoutingModule
+    AdvancedRoutingModule
   ]
 })
-export class BasicModule {}
+export class AdvancedModule {}

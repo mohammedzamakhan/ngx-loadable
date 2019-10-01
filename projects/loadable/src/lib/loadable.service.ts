@@ -8,8 +8,10 @@ import {
   Type,
   ComponentFactoryResolver,
   TemplateRef,
+  Optional,
+  Inject,
 } from '@angular/core';
-import { ModulesConfig, FunctionReturningPromise, ModuleConfig, ExtraOptions } from './loadable.config';
+import { ModulesConfig, FunctionReturningPromise, ModuleConfig, ExtraOptions, ILoadableRootOptions } from './loadable.config';
 
 export const LOADABLE_CONFIG = new InjectionToken<LoadableService>('LOADABLE_CONFIG');
 
@@ -22,7 +24,8 @@ export class LoadableService {
   public modules: ModulesConfig = [];
   constructor(
     private compiler: Compiler,
-    private cfr: ComponentFactoryResolver
+    private cfr: ComponentFactoryResolver,
+    @Optional() @Inject(LOADABLE_ROOT_OPTIONS) private options: ILoadableRootOptions,
   ) { }
 
   addConfig(config: ModulesConfig) {
@@ -31,6 +34,11 @@ export class LoadableService {
         ...this.modules,
         ...config,
       ];
+      config.forEach(module => {
+        if (module.preload || (this.options && this.options.preload)) {
+          this.preload(module.load);
+        }
+      });
     }
   }
 
@@ -57,6 +65,9 @@ export class LoadableService {
 
   _renderVCR(mr: NgModuleRef<any> | TemplateRef<any> | Type<any>, vcr: ViewContainerRef) {
     let factory;
+    if (!mr) {
+      return;
+    }
     if (mr instanceof TemplateRef) {
       vcr.remove();
       return vcr.createEmbeddedView(mr);

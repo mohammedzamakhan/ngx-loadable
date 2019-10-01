@@ -36,7 +36,6 @@ import { LazyElementsModule } from '@angular-extensions/elements';
 import { FeatureComponent } from './feature-component';
 
 @NgModule({
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [CommonModule, LazyElementsModule], // or imports: [SharedModule]
   declarations: [FeatureComponent]
 })
@@ -48,7 +47,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { LazyElementsModule } from '@angular-extensions/elements';
 
 @NgModule({
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [BrowserModule, LazyElementsModule],
   declarations: [AppComponent],
   bootstrap: [AppComponent]

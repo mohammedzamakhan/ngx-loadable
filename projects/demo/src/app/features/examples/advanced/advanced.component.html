@@ -1,0 +1,134 @@
+<div class="wrapper">
+  <h1>Advanced</h1>
+
+  <h2>Elements configured in a feature module</h2>
+  <div class="content">
+    <div class="implementation" *ngIf="!example1">
+      <button mat-flat-button color="primary" (click)="example1 = true">
+        <mat-icon>play_arrow</mat-icon>
+        Show
+      </button>
+    </div>
+    <div [class.implementation]="example1">
+      <ngx-loadable module="card" [show]="example1"></ngx-loadable>
+    </div>
+    <div class="description">
+      <p>
+        In this example we're pre-configuring
+        <code>LazyElementsModule</code> with the element config. That way we
+        don't have to specify url of the element in the
+        <code>*axLazyElement</code> directive. The element will be lazy-loaded
+        the same way as if we specified url directly.
+      </p>
+      <pre [highlight]="codeExample1html"></pre>
+      <pre [highlight]="codeExample1module"></pre>
+    </div>
+  </div>
+
+  <h2>Elements configured in a feature module with HTML inline options</h2>
+  <div class="content">
+    <div class="implementation" *ngIf="!example2">
+      <button mat-flat-button color="primary" (click)="example2 = true">
+        <mat-icon>play_arrow</mat-icon>
+        Show
+      </button>
+    </div>
+    <div [class.implementation]="example2">
+      <ngx-loadable module="expansion" [show]="example2">
+        <ng-template #loading>Loading...</ng-template>
+      </ngx-loadable>
+    </div>
+    <div class="description">
+      <p>
+        We don't have to specify <code>url</code> when using pre-configured
+        <code>LazyElementsModule</code>. We still might need to pass in
+        <code>null</code> url into <code>*axLazyElement</code> directive in case
+        we want to use other options like <code>module</code> or
+        <code>loadingTemplate</code>.
+      </p>
+      <pre [highlight]="codeExample2html"></pre>
+      <pre [highlight]="codeExample2module"></pre>
+    </div>
+  </div>
+
+  <h2>
+    Elements configured in a feature module with <code>isModule</code> option
+  </h2>
+  <div class="content">
+    <div class="implementation" *ngIf="!example3">
+      <button mat-flat-button color="primary" (click)="example3 = true">
+        <mat-icon>play_arrow</mat-icon>
+        Show
+      </button>
+    </div>
+    <div [class.implementation]="example3">
+
+    </div>
+    <div class="description">
+      <p>
+        We can also pre-configure <code>isModule</code> flag by passing it to
+        the <code>LazyElementsModule</code>config. That way we don't have to
+        specify it in the template for module style elements!
+      </p>
+      <pre [highlight]="codeExample3html"></pre>
+      <pre [highlight]="codeExample3module"></pre>
+    </div>
+  </div>
+
+  <h2>
+    Elements configured in <code>AppModule</code> or
+    <code>CoreModule</code> using <code>forRoot</code>
+  </h2>
+  <div class="content">
+    <div class="implementation" *ngIf="!example4">
+      <button mat-flat-button color="primary" (click)="example4 = true">
+        <mat-icon>play_arrow</mat-icon>
+        Show
+      </button>
+    </div>
+    <div [class.implementation]="example4">
+    </div>
+    <div class="description">
+      <p>
+        Some options can be pre-configured for the whole application using
+        <code>LazyElementsModule.forRoot()</code>. This is usually done in
+        <code>AppModule</code> or in the <code>CoreModule</code>. That way we
+        don't have to specify this options in the feature modules while still
+        preserving posibility to override them if necessary. The
+        <code>forRoot()</code> accepts also <code>elementConfigs</code> so they
+        can be pre-configured centrally removing the need to configure them in
+        feature modules or inline in the templates.
+      </p>
+      <pre [highlight]="codeExample4html"></pre>
+      <pre [highlight]="codeExample4coreModule"></pre>
+    </div>
+  </div>
+
+  <h2>
+    Preloading
+  </h2>
+  <div class="content">
+    <div class="implementation">
+      <button mat-flat-button color="primary" (click)="preload()">
+        Preload
+      </button>
+      <button
+        class="additional-btn"
+        mat-flat-button
+        color="primary"
+        (click)="preloadFab()"
+      >
+        Preload Fab
+      </button>
+    </div>
+    <div class="description">
+      <p>
+        You can inject <code>LazyElementLoaderService</code> and call the
+        <code>preload</code> method to preload all the configured modules, or
+        specify the list of <code>tags</code> you want to preload.
+      </p>
+      <pre [highlight]="codeExample5html"></pre>
+      <pre [highlight]="codeExample5ts"></pre>
+    </div>
+  </div>
+</div>

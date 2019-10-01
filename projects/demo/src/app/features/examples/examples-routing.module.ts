@@ -18,11 +18,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./basic/basic.module').then(m => m.BasicModule)
       },
-      // {
-      //   path: 'advanced',
-      //   loadChildren: () =>
-      //     import('./advanced/advanced.module').then(m => m.AdvancedModule)
-      // },
+      {
+        path: 'advanced',
+        loadChildren: () =>
+          import('./advanced/advanced.module').then(m => m.AdvancedModule)
+      },
       // {
       //   path: 'dynamic',
       //   loadChildren: () =>

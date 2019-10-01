@@ -10,6 +10,7 @@ export interface ModuleConfig {
   timeoutTemplate?: Type<any>;
   timeout?: number;
   isElement?: boolean;
+  preload?: boolean;
 }
 
 export interface ExtraOptions {
@@ -28,6 +29,7 @@ export interface ILoadableRootOptions {
   errorComponent?: Type<any>;
   timeoutTemplate?: Type<any>;
   isElement?: boolean;
+  preload?: boolean;
 }
 
 export interface ILoadableConfig {

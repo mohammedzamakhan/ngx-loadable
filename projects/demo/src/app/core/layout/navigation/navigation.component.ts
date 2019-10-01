@@ -47,10 +47,10 @@ const NAVIGATION = [
         label: 'Basic',
         url: 'examples/basic'
       },
-      // {
-      //   label: 'Advanced',
-      //   url: 'examples/advanced'
-      // },
+      {
+        label: 'Advanced',
+        url: 'examples/advanced'
+      },
       // {
       //   label: 'Dynamic',
       //   url: 'examples/dynamic'

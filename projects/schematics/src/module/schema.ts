@@ -50,12 +50,18 @@ export interface Schema {
      * The scope for the new routing module.
      */
     routingScope?: RoutingScope;
+    /**
+     * Wrap the component as Angular Element
+     */
+    element?: string;
+    prefix?: string;
+    selector?: string;
 }
 
 /**
  * The scope for the new routing module.
  */
 export enum RoutingScope {
-    Child = "Child",
-    Root = "Root",
+    Child = 'Child',
+    Root = 'Root',
 }
