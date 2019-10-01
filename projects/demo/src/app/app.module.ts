@@ -13,6 +13,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './features/home/home.module';
 import { AppRoutingModule } from './app-routing.module';
+import { ErrorComponent } from './shared/error/error.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,15 @@ import { AppRoutingModule } from './app-routing.module';
         load: () => import('./breach/breach.module').then(mod => mod.BreachModule),
         isElement: true,
         loadingComponent: SpinnerComponent
-      }],
+      },
+      {
+        name: 'card',
+        load: () => import('./card/card.module').then(m => m.CardModule),
+        loadingComponent: SpinnerComponent,
+        errorComponent: ErrorComponent,
+        preload: true,
+      },
+        { name: 'expansion', load: () => import('./expansion/expansion.module').then(m => m.ExpansionModule) }],
       rootOptions: {
         loadingComponent: LoaderComponent,
       }

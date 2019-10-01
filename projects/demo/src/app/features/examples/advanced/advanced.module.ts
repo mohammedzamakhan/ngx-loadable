@@ -9,7 +9,6 @@ import { AdvancedRoutingModule } from './advanced-routing.module';
 import { AdvancedComponent } from './advanced.component';
 
 @NgModule({
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [AdvancedComponent],
   imports: [
     HighlightModule,

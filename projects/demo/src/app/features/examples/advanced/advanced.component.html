@@ -10,6 +10,7 @@
       </button>
     </div>
     <div [class.implementation]="example1">
+      <ngx-loadable module="card" [show]="example1"></ngx-loadable>
     </div>
     <div class="description">
       <p>
@@ -33,7 +34,9 @@
       </button>
     </div>
     <div [class.implementation]="example2">
-
+      <ngx-loadable module="expansion" [show]="example2">
+        <ng-template #loading>Loading...</ng-template>
+      </ngx-loadable>
     </div>
     <div class="description">
       <p>

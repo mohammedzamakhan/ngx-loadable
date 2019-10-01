@@ -1,12 +1,11 @@
 <h1>API</h1>
 
 <section>
-  <h2>LazyElementDirective</h2>
-  <code color="accent">Directive</code>
+  <h2>LoadableComponent</h2>
+  <code color="accent">Component</code>
   <br />
   <p>
-    A structural directive which lazy loads desired Angular element (or any
-    other webcomponent)
+    A component which lazy loads desired Angular module (or Angular Element)
   </p>
   <mat-card>
     <table>
@@ -16,11 +15,11 @@
       </thead>
       <tbody>
         <tr>
-          <td><pre>selector</pre></td>
+          <td><pre>@Input() module: string</pre></td>
           <td>
             <p>
-              The selector is <code>axLazyElement</code> which should be used
-              with <code>*</code> as in <code>*axLazyElement</code> because it
+              The selector is <code>axLoadable</code> which should be used
+              with <code>*</code> as in <code>*axLoadable</code> because it
               is a structural directive.
             </p>
           </td>
@@ -28,8 +27,8 @@
         <tr>
           <td>
             <pre>
-@Input('axLazyElement')
-url: string;</pre
+@Input()
+show: boolean;</pre
             >
           </td>
           <td>
@@ -42,14 +41,14 @@ url: string;</pre
                 Inline string value -
                 <code
                   >&#60;some-element
-                  *axLazyElement="'https://elements.com/some-element'">&#60;/some-element></code
+                  *axLoadable="'https://elements.com/some-element'">&#60;/some-element></code
                 >
               </li>
               <li>
                 Component property reference -
                 <code
                   >&#60;some-element
-                  *axLazyElement="url">&#60;/some-element></code
+                  *axLoadable="url">&#60;/some-element></code
                 >
               </li>
               <code color="accent">Pre-configurable</code>
@@ -59,8 +58,8 @@ url: string;</pre
         <tr>
           <td>
             <pre>
-@Input('axLazyElementLoadingTemplate')
-loadingTemplateRef: TemplateRef&#60;any>;</pre
+@Input()
+timeout: number;</pre
             >
           </td>
           <td>
@@ -73,7 +72,7 @@ loadingTemplateRef: TemplateRef&#60;any>;</pre
               >
               and then we have to reference it
               <code
-                >&#60;some-element *axLazyElement="url; loadingTemplate:
+                >&#60;some-element *axLoadable="url; loadingTemplate:
                 loading">&#60;/some-element></code
               >
             </p>
@@ -85,8 +84,8 @@ loadingTemplateRef: TemplateRef&#60;any>;</pre
         <tr>
           <td>
             <pre>
-@Input('axLazyElementErrorTemplate')
-errorTemplateRef: TemplateRef&#60;any>;</pre
+@Input()
+isElement: boolean;</pre
             >
           </td>
           <td>
@@ -100,7 +99,7 @@ errorTemplateRef: TemplateRef&#60;any>;</pre
               >
               and then we have to reference it
               <code
-                >&#60;some-element *axLazyElement="url; errorTemplate:
+                >&#60;some-element *axLoadable="url; errorTemplate:
                 error">&#60;/some-element></code
               >
             </p>
@@ -112,8 +111,8 @@ errorTemplateRef: TemplateRef&#60;any>;</pre
         <tr>
           <td>
             <pre>
-@Input('axLazyElementModule')
-isModule: boolean;</pre
+@Output()
+init: EventEmitter;</pre
             >
           </td>
           <td>
@@ -124,7 +123,7 @@ isModule: boolean;</pre
               <code>type="module"</code> in case this flag was set to true. The
               flag can be set using
               <code
-                >&#60;some-element *axLazyElement="url; module:
+                >&#60;some-element *axLoadable="url; module:
                 true">&#60;/some-element></code
               >
             </p>
@@ -140,12 +139,12 @@ isModule: boolean;</pre
 </section>
 
 <section>
-  <h2>LazyElementModule</h2>
+  <h2>LoadableModule</h2>
   <code color="accent">Module</code>
   <br />
   <p>
-    An Angular module which exports <code>*axLazyElement</code> and
-    <code>*axLazyElementDynamic</code> directives so it has to be imported in
+    An Angular module which exports <code>*axLoadable</code> and
+    <code>*axLoadableDynamic</code> directives so it has to be imported in
     other Angular modules which want to use these directives in the templates of
     their components. Module can be also pre-configured using
     <code>forRoot()</code> and <code>forFeature()</code> static methods.
@@ -158,11 +157,11 @@ isModule: boolean;</pre
       </thead>
       <tbody>
         <tr>
-          <td><pre>forRoot(options: LazyElementModuleRootOptions)</pre></td>
+          <td><pre>forRoot(options: LoadableModuleRootOptions)</pre></td>
           <td>
             <p>
               The <code>forRoot()</code> static method which accepts options of
-              <code>LazyElementModuleRootOptions</code> type <br /><code
+              <code>LoadableModuleRootOptions</code> type <br /><code
                 color="accent"
                 >Optional</code
               >
@@ -170,11 +169,11 @@ isModule: boolean;</pre
           </td>
         </tr>
         <tr>
-          <td><pre>forFeature(options: LazyElementModuleOptions)</pre></td>
+          <td><pre>forFeature(options: LoadableModuleOptions)</pre></td>
           <td>
             <p>
               The <code>forFeature()</code> static method which accepts options
-              of <code>LazyElementModuleOptions</code> type <br /><code
+              of <code>LoadableModuleOptions</code> type <br /><code
                 color="accent"
                 >Optional</code
               >
@@ -187,12 +186,12 @@ isModule: boolean;</pre
 </section>
 
 <section>
-  <h2>LazyElementModuleRootOptions</h2>
+  <h2>LoadableModuleRootOptions</h2>
   <code color="accent">Interface</code>
   <br />
   <p>
     Type of an option object that can be passed to static
-    <code>forRoot()</code> method of <code>LazyElementModule</code>.
+    <code>forRoot()</code> method of <code>LoadableModule</code>.
   </p>
   <mat-card>
     <table>
@@ -213,10 +212,10 @@ isModule: boolean;</pre
           </td>
         </tr>
         <tr>
-          <td><pre>rootOptions: LazyElementRootOptions</pre></td>
+          <td><pre>rootOptions: LoadableRootOptions</pre></td>
           <td>
             <p>
-              Optional object of <code>LazyElementRootOptions</code>... <br />
+              Optional object of <code>LoadableRootOptions</code>... <br />
               <code color="accent">Optional</code>&nbsp;<code color="accent"
                 >Default: &#123; }</code
               >
@@ -229,19 +228,19 @@ isModule: boolean;</pre
 </section>
 
 <section>
-  <h2>LazyElementRootOptions</h2>
+  <h2>LoadableRootOptions</h2>
   <code color="accent">Interface</code>
   <br />
   <p>
     Type of an option object that can be passed as the
     <code>rootOptions</code> of the
-    <code>LazyElementModuleRootOptions</code> into the
-    <code>forRoot()</code> method of <code>LazyElementModule</code>. These
+    <code>LoadableModuleRootOptions</code> into the
+    <code>forRoot()</code> method of <code>LoadableModule</code>. These
     options will be applied to every element loaded using
-    <code>*axLazyElement</code> or
-    <code>*axLazyElementDynamic</code> directives. These options can be
+    <code>*axLoadable</code> or
+    <code>*axLoadableDynamic</code> directives. These options can be
     overridden by the element configuration in <code>forFeature()</code> and
-    lastly by the inline configuration of <code>*axLazyElement</code> directive.
+    lastly by the inline configuration of <code>*axLoadable</code> directive.
   </p>
   <mat-card>
     <table>
@@ -257,7 +256,7 @@ isModule: boolean;</pre
               Component class to be displayed during element loading (similar to
               <code>loadingTemplate</code> that can be specified inline in the
               template, eg
-              <code>*axLazyElement="url; loadingTemplate: loading;"</code>)
+              <code>*axLoadable="url; loadingTemplate: loading;"</code>)
             </p>
             <code color="accent">Optional</code>&nbsp;<code color="accent"
               >Default: undefined</code
@@ -272,7 +271,7 @@ isModule: boolean;</pre
               (similar to
               <code>errorTemplate</code> that can be specified inline in the
               template, eg
-              <code>*axLazyElement="url; errorTemplate: error;"</code>)
+              <code>*axLoadable="url; errorTemplate: error;"</code>)
             </p>
             <code color="accent">Optional</code>&nbsp;<code color="accent"
               >Default: undefined</code
@@ -310,12 +309,12 @@ isModule: boolean;</pre
 </section>
 
 <section>
-  <h2>LazyElementModuleOptions</h2>
+  <h2>LoadableModuleOptions</h2>
   <code color="accent">Interface</code>
   <br />
   <p>
     Type of an option object that can be passed to static
-    <code>forFeature()</code> method of <code>LazyElementModule</code>.
+    <code>forFeature()</code> method of <code>LoadableModule</code>.
   </p>
   <mat-card>
     <table>
@@ -345,10 +344,10 @@ isModule: boolean;</pre
   <code color="accent">Interface</code>
   <br />
   <p>
-    The element config used to pre-configure <code>LazyElementModule</code> so
+    The element config used to pre-configure <code>LoadableModule</code> so
     that we do not have to specify url (and other supported options) inline
-    inside of the <code>*axLazyElement</code> and
-    <code>*axLazyElementDynamic</code> directives. The configs are matched to
+    inside of the <code>*axLoadable</code> and
+    <code>*axLoadableDynamic</code> directives. The configs are matched to
     particular elements by the tag. The elements are still loaded lazily even
     though they are preconfigured in the module during application startup...
   </p>
@@ -395,7 +394,7 @@ isModule: boolean;</pre
               Component class to be displayed during element loading (similar to
               <code>loadingTemplate</code> that can be specified inline in the
               template, eg
-              <code>*axLazyElement="url; loadingTemplate: loading;"</code>)
+              <code>*axLoadable="url; loadingTemplate: loading;"</code>)
             </p>
             <code color="accent">Optional</code>&nbsp;<code color="accent"
               >Default: undefined</code
@@ -410,7 +409,7 @@ isModule: boolean;</pre
               (similar to
               <code>errorTemplate</code> that can be specified inline in the
               template, eg
-              <code>*axLazyElement="url; errorTemplate: error;"</code>)
+              <code>*axLoadable="url; errorTemplate: error;"</code>)
             </p>
             <code color="accent">Optional</code>&nbsp;<code color="accent"
               >Default: undefined</code
@@ -434,7 +433,7 @@ isModule: boolean;</pre
 </section>
 
 <section>
-  <h2>LazyElementsLoaderService</h2>
+  <h2>LoadableService</h2>
   <code color="accent">Service</code>
   <br />
   <p>

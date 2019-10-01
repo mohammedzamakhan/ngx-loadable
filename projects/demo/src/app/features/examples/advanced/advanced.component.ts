@@ -48,8 +48,8 @@ const CODE_EXAMPLE_1_MODULE = `// pre-configured LoadableModule
 const options: LoadableModuleOptions = {
   elementConfigs: [
     {
-      name: 'lazy',
-      load: () => import('./lazy/lazy.module').then(mod => mod.LazyModule),
+      name: 'card',
+      load: () => import('./card/card.module').then(mod => mod.CardModule),
       loadingComponent: SpinnerComponent,
       errorComponent: ErrorComponent,
       preload: true
@@ -58,7 +58,6 @@ const options: LoadableModuleOptions = {
 };
 
 @NgModule({
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [FeatureComponent],
   imports: [
     LoadableModule.forFeature(options),
@@ -68,20 +67,19 @@ export class FeatureModule { }
 `;
 
 const CODE_EXAMPLE_1_HTML = `<!-- No need to specify loading template or error template -->
-<ngx-loadable module="lazy" [show]="true"></ngx-loadable>`;
+<ngx-loadable module="card" [show]="true"></ngx-loadable>`;
 
 const CODE_EXAMPLE_2_MODULE = `// pre-configured LoadableModule in FeatureModule
 const options: LoadableModuleOptions = {
   elementConfigs: [
     {
-      name: 'lazy',
-      load: () => import('./lazy/lazy.module').then(mod => mod.LazyModule)
+      name: 'expansion',
+      load: () => import('./expansion/expansion.module').then(mod => mod.ExpansionModule)
     }
   ]
 };
 
 @NgModule({
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [FeatureComponent],
   imports: [
     LoadableModule.forFeature(options),
@@ -107,7 +105,6 @@ const options: LoadableModuleOptions = {
 };
 
 @NgModule({
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [FeatureComponent],
   imports: [
     LoadablesModule.forFeature(options),
@@ -140,7 +137,6 @@ const options: LoadableModuleRootOptions = {
 };
 
 @NgModule({
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     LoadableModule.forRoot(options),
   ]
