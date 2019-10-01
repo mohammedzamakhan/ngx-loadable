@@ -111,16 +111,20 @@ export function insertAfterLastOccurrence(nodes: ts.Node[],
                                           file: string,
                                           fallbackPos: number,
                                           syntaxKind?: ts.SyntaxKind): Change {
-  let lastItem = nodes.sort(nodesByPosition).pop();
-  if (!lastItem) {
-    throw new Error();
+
+  let lastItem: any = nodes.sort(nodesByPosition).pop();
+  if (nodes.length > 0) {
+    if (!lastItem) {
+      throw new Error();
+    }
+    if (syntaxKind) {
+      lastItem = findNodes(lastItem, syntaxKind).sort(nodesByPosition).pop();
+    }
+    if (!lastItem && fallbackPos === undefined) {
+      throw new Error(`tried to insert ${toInsert} as first occurence with no fallback position`);
+    }
   }
-  if (syntaxKind) {
-    lastItem = findNodes(lastItem, syntaxKind).sort(nodesByPosition).pop();
-  }
-  if (!lastItem && fallbackPos === undefined) {
-    throw new Error(`tried to insert ${toInsert} as first occurence with no fallback position`);
-  }
+
   const lastItemPosition: number = lastItem ? lastItem.getEnd() : fallbackPos;
 
   return new InsertChange(file, lastItemPosition, toInsert);
@@ -581,6 +585,8 @@ export function addRouteDeclarationToModule(
   if (occurencesCount > 0) {
     const identation = text.match(/\r?\n(\r?)\s*/) || [];
     route = `,${identation[0] || ' '}${routeLiteral}`;
+  } else {
+    route = `${routeLiteral}`;
   }
 
   return insertAfterLastOccurrence(
