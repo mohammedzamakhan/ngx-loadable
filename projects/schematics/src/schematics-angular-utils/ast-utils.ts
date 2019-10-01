@@ -557,7 +557,6 @@ export function addRouteDeclarationToModule(
   if (ts.isArrayLiteralExpression(routesArg)) {
     routesArr = routesArg;
   } else {
-    console.log('else-----');
     const routesVarName = routesArg.getText();
     let routesVar;
     if (routesArg.kind === ts.SyntaxKind.Identifier) {
