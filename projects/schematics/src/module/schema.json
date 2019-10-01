@@ -66,8 +66,14 @@
       "x-user-analytics": 15
     },
     "element": {
-      "type": "string",
+      "type": "boolean",
       "description": "When defined, the component will be created as an Angualr element"
+    },
+    "prefix": {
+      "type": "string"
+    },
+    "selector": {
+      "type": "string"
     }
   },
   "required": [

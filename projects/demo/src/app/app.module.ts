@@ -13,7 +13,6 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './features/home/home.module';
 import { AppRoutingModule } from './app-routing.module';
-import { LazyTestModule } from '../../lazy-test/lazy-test.module';
 
 @NgModule({
   declarations: [
@@ -40,8 +39,7 @@ import { LazyTestModule } from '../../lazy-test/lazy-test.module';
         load: () => import('./breach/breach.module').then(mod => mod.BreachModule),
         isElement: true,
         loadingComponent: SpinnerComponent
-      },
-        { name: 'lazy-test', load: () => import('./lazy-test/lazy-test.module').then(m => m.LazyTestModule), isElement: true }],
+      }],
       rootOptions: {
         loadingComponent: LoaderComponent,
       }
@@ -49,7 +47,6 @@ import { LazyTestModule } from '../../lazy-test/lazy-test.module';
     CoreModule,
     SharedModule,
     AppRoutingModule,
-    LazyTestModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

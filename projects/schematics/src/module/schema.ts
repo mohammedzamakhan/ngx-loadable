@@ -54,6 +54,8 @@ export interface Schema {
      * Wrap the component as Angular Element
      */
     element?: string;
+    prefix?: string;
+    selector?: string;
 }
 
 /**

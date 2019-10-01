@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';<% } %>
 <% if(!element) { %>export class <%= classify(name) %>Module { } <% }%><% if(element) { %>export class <%= classify(name) %>Module {
   constructor(injector: Injector) {
     const el = createCustomElement(<%= classify(name) %>Component, {injector});
-    customElements.define('<%= element %>', el);
+    customElements.define('<%= selector %>', el);
   }
 }
 <% }%>

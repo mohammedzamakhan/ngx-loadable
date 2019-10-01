@@ -129,6 +129,7 @@ export default function(options: ModuleOptions): Rule {
         options.project = Object.keys(workspace.projects)[0];
       }
       const project = workspace.projects[options.project];
+      options.selector = options.selector || buildSelector(options, project && project.prefix || '');
 
       const root = project.sourceRoot ? `/${project.sourceRoot}/` : `/${project.root}/src/`;
       const projectDirName = project.projectType === 'application' ? 'app' : 'lib';
@@ -150,6 +151,7 @@ export default function(options: ModuleOptions): Rule {
     options.name = parsedPath.name;
     options.path = parsedPath.path;
 
+
     const templateSource = apply(url('./files'), [
       filter(path => !path.endsWith('-routing.module.ts.template')),
       applyTemplates({
@@ -167,7 +169,7 @@ export default function(options: ModuleOptions): Rule {
       `${!options.flat ? moduleDasherized + '/' : ''}${moduleDasherized}.module.ts`;
 
     return chain([
-      addDeclarationToNgModule(options),
+      // addDeclarationToNgModule(options),
       addRouteDeclarationToNgModule(options, routingModulePath),
       mergeWith(templateSource),
       schematic('component', {
@@ -176,4 +178,15 @@ export default function(options: ModuleOptions): Rule {
       }),
     ]);
   };
+}
+
+function buildSelector(options: ModuleOptions, projectPrefix: string) {
+  let selector = strings.dasherize(options.name);
+  if (options.prefix) {
+    selector = `${options.prefix}-${selector}`;
+  } else if (options.prefix === undefined && projectPrefix) {
+    selector = `${projectPrefix}-${selector}`;
+  }
+
+  return selector;
 }
