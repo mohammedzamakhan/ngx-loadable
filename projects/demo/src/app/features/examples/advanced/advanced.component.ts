@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoadableService } from 'ngx-loadable';
 
 @Component({
   selector: 'demo-advanced',
@@ -11,6 +12,7 @@ export class AdvancedComponent implements OnInit {
   example2 = false;
   example3 = false;
   example4 = false;
+  showBreach = false;
 
   // example code examples
   codeExample1module = CODE_EXAMPLE_1_MODULE;
@@ -23,11 +25,12 @@ export class AdvancedComponent implements OnInit {
   codeExample4coreModule = CODE_EXAMPLE_4_CORE_MODULE;
   codeExample5html = CODE_EXAMPLE_5_HTML;
   codeExample5ts = CODE_EXAMPLE_5_TS;
+  codeExample6html = CODE_EXAMPLE_6_HTML;
 
   // example state
   counter = 0;
 
-  constructor() {}
+  constructor(private loadableService: LoadableService) {}
 
   ngOnInit() {}
 
@@ -36,11 +39,11 @@ export class AdvancedComponent implements OnInit {
   }
 
   preload() {
-    // this.lazyElementLoaderService.preload();
+    this.loadableService.preloadAll().then(() => alert('preloaded all modules'));
   }
 
-  preloadFab() {
-    // this.lazyElementLoaderService.preload(['mwc-fab']);
+  preloadBreach() {
+    this.loadableService.preloadAll(['app-breach']).then(() => alert('preloaded breach module'));
   }
 }
 
@@ -119,7 +122,7 @@ const CODE_EXAMPLE_3_HTML = `<!-- We have to specify module to be able to pass i
 </ngx-loadable>`;
 
 const CODE_EXAMPLE_4_HTML = `<!-- This can be used in any place in the whole application -->
-<mwc-fab icon="code" *axLazyElement></mwc-fab>`;
+<ngx-loadable module="app-element-test" [show]="true"></ngx-loadable>`;
 
 const CODE_EXAMPLE_4_CORE_MODULE = `// pre-configured LoadableModule in CoreModule or AppModule
 const options: LoadableModuleRootOptions = {
@@ -130,8 +133,8 @@ const options: LoadableModuleRootOptions = {
   },
   elementConfigs: [
     {
-      name: 'lazy',
-      load: () => import('./lazy/lazy.module').then(mod => mod.LazyModule),
+      name: 'app-element-test',
+      load: () => import('./element-test/element-test.module').then(mod => mod.ElementTestModule),
     }
   ]
 };
@@ -154,8 +157,12 @@ class PageComponent {
     this.loadableService.preloadAll();
   }
 
-  preloadFab() {
-    this.loadableService.preloadAll(['lazy']);
+  preloadBreach() {
+    this.loadableService.preloadAll(['app-breach']);
   }
 }
+`;
+
+const CODE_EXAMPLE_6_HTML = `<button (mouseover)="breachModule.preload()" (click)="showBreach = true">Hover to load/ Click to show</button>
+<ngx-loadable #breachModule module="app-breach" [show]="showBreach"></ngx-loadable>
 `;

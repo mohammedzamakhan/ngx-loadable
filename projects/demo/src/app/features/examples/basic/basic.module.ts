@@ -25,6 +25,12 @@ import { BasicComponent } from './basic.component';
           load: () => (new Promise((resolve) => setTimeout(() => resolve(true), 500)))
             .then(() => import('./../../../lazy/lazy.module'))
             .then(mod => mod.LazyModule)
+        },
+        {
+          name: 'timeout',
+          load: () => (new Promise((resolve) => setTimeout(() => resolve(true), 5000)))
+            .then(() => import('./../../../lazy/lazy.module'))
+            .then(mod => mod.LazyModule)
         }
       ]
     }),

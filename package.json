@@ -1,6 +1,6 @@
 {
   "name": "ngx-loadable",
-  "version": "3.0.0-next.10",
+  "version": "3.0.0-next.11",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --project demo -o",

@@ -43,17 +43,12 @@ const CODE_EXAMPLE_3 = `<ngx-loadable module="error" [show]="show">
   <ng-template #error>Loading failed...</ng-template>
 </ngx-loadable>`;
 
-const CODE_EXAMPLE_4 = `<!-- url = 'https://unpkg.com/@ionic/core@4.6.2/dist/ionic/ionic.js' -->;
-<!-- customYearValues = [2020, 2030, 2040] -->;
-<ion-item *axLazyElement="url">
-  <ion-label>Pick a year</ion-label>
-  <ion-datetime
-    [displayFormat]="'YYYY'"
-    [pickerFormat]="'YYYY'"
-    [yearValues]="customYearValues"
-  >
-  </ion-datetime>
-</ion-item>`;
+const CODE_EXAMPLE_4 = `<ngx-loadable module="timeout" [timeout]="2000" [show]="show">
+  <ng-template #loading>Loading...</ng-template>
+  <ng-template #timedOut>
+    Timed out 😔
+  </ng-template>
+</ngx-loadable>`;
 
 const CODE_EXAMPLE_5 = `<!-- url = 'https://unpkg.com/@deckdeckgo/qrcode@1.0.0-alpha.9/dist/deckdeckgo-qrcode/deckdeckgo-qrcode.js' -->;
 <deckgo-qrcode *axLazyElement="url" content="https://angular-extensions.github.io/elements" style="--deckgo-qrcode-size: 300px;">

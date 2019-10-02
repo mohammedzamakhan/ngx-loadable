@@ -1,5 +1,15 @@
+<div class="quick-nav">
+  <h3>Quick navigation</h3>
+  <ul>
+    <li><a routerLink="." fragment="basic-usage">Basic usage</a></li>
+    <li><a routerLink="." fragment="loading-template">Loading template</a></li>
+    <li><a routerLink="." fragment="error-template">Error template</a></li>
+    <li><a routerLink="." fragment="timeout">Timeout</a></li>
+  </ul>
+</div>
+
 <div class="wrapper">
-  <h1>Basic</h1>
+  <h1 id="basic-usage">Basic</h1>
 
   <h2>Plain directive</h2>
   <div class="content">
@@ -25,7 +35,7 @@
     </div>
   </div>
 
-  <h2>Use loading <code>&#60;ng-template #loading></code></h2>
+  <h2 id="loading-template">Use loading <code>&#60;ng-template #loading></code></h2>
   <div class="content">
     <div class="implementation" *ngIf="!example2">
       <button mat-flat-button color="primary" (click)="example2 = true">
@@ -51,7 +61,7 @@
     </div>
   </div>
 
-  <h2>Use error <code>&#60;ng-template #error></code></h2>
+  <h2 id="error-template">Use error <code>&#60;ng-template #error></code></h2>
   <div class="content">
     <div class="implementation" *ngIf="!example3">
       <button mat-flat-button color="primary" (click)="example3 = true">
@@ -75,6 +85,34 @@
         module)
       </p>
       <pre [highlight]="codeExample3"></pre>
+    </div>
+  </div>
+
+  <h2 id="timeout">Timeout</h2>
+  <div class="content">
+    <div class="implementation" *ngIf="!example4">
+      <button mat-flat-button color="primary" (click)="example4 = true">
+        <mat-icon>play_arrow</mat-icon>
+        Show
+      </button>
+    </div>
+    <div [class.implementation]="example4">
+      <ngx-loadable module="timeout" [timeout]="2000" [show]="example4">
+        <ng-template #loading>Loading...</ng-template>
+        <ng-template #timedOut>
+          Timed out 😔
+        </ng-template>
+      </ngx-loadable>
+    </div>
+    <div class="description">
+      <p>
+        In this example we're loading
+        <code>timeout</code> module using the
+        <code>ngx-loadable</code> component and added <code>timeout</code> input as <code>2000</code> and we're also adding
+        <code>&#60;ng-template #timedOut>Timed out 😔&#60;ng-template></code>
+        which will be displayed if the module is not loaded in 2 seconds.
+      </p>
+      <pre [highlight]="codeExample4"></pre>
     </div>
   </div>
 </div>

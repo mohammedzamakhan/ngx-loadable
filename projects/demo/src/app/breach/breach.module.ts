@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { createCustomElement } from '@angular/elements';
 
 import { BreachComponent } from './breach.component';
+import { MatTableModule } from '@angular/material';
 
 @NgModule({
   declarations: [BreachComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    MatTableModule
   ]
 })
 export class BreachModule {
