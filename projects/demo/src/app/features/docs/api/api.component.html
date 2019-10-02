@@ -18,9 +18,7 @@
           <td><pre>@Input() module: string</pre></td>
           <td>
             <p>
-              The selector is <code>axLoadable</code> which should be used
-              with <code>*</code> as in <code>*axLoadable</code> because it
-              is a structural directive.
+              This input specifies the module to be lazy loaded.
             </p>
           </td>
         </tr>
@@ -33,26 +31,8 @@ show: boolean;</pre
           </td>
           <td>
             <p>
-              The url of the element bundle (or module). This is the main
-              property which corresponds to the main directive selector.
+              This input specifies when the lazy module should be loaded.
             </p>
-            <ul>
-              <li>
-                Inline string value -
-                <code
-                  >&#60;some-element
-                  *axLoadable="'https://elements.com/some-element'">&#60;/some-element></code
-                >
-              </li>
-              <li>
-                Component property reference -
-                <code
-                  >&#60;some-element
-                  *axLoadable="url">&#60;/some-element></code
-                >
-              </li>
-              <code color="accent">Pre-configurable</code>
-            </ul>
           </td>
         </tr>
         <tr>
@@ -64,21 +44,12 @@ timeout: number;</pre
           </td>
           <td>
             <p>
-              Reference to Angular template which will be displayed before the
-              element bundle (or module) was loaded. To show loader we can
-              create following template
-              <code
-                >&#60;ng-template #loading>Loading...&#60;/ng-template></code
-              >
-              and then we have to reference it
-              <code
-                >&#60;some-element *axLoadable="url; loadingTemplate:
-                loading">&#60;/some-element></code
-              >
+              This input specifies the timeout period.
             </p>
             <code color="accent">Optional</code>&nbsp;<code color="accent"
               >Default: undefined</code
             >
+            <code color="accent">Pre-configurable</code>
           </td>
         </tr>
         <tr>
@@ -90,22 +61,12 @@ isElement: boolean;</pre
           </td>
           <td>
             <p>
-              Reference to Angular template which will be hich will be displayed
-              before the element bundle (or module) loading failed. To show
-              error message we can create following template
-              <code
-                >&#60;ng-template #error>Loading
-                failed...&#60;/ng-template></code
-              >
-              and then we have to reference it
-              <code
-                >&#60;some-element *axLoadable="url; errorTemplate:
-                error">&#60;/some-element></code
-              >
+              This input specifies if the comprises of Angular Element
             </p>
             <code color="accent">Optional</code>&nbsp;<code color="accent"
-              >Default: undefined</code
+              >Default: false</code
             >
+            <code color="accent">Pre-configurable</code>
           </td>
         </tr>
         <tr>
@@ -117,20 +78,11 @@ init: EventEmitter;</pre
           </td>
           <td>
             <p>
-              Flag that specifies if the element is loaded as bundle (default)
-              or as module. This will influence the generated
-              <code>&#60;script></code> tag which will get
-              <code>type="module"</code> in case this flag was set to true. The
-              flag can be set using
-              <code
-                >&#60;some-element *axLoadable="url; module:
-                true">&#60;/some-element></code
-              >
+              This output gives the instance of the lazy loaded component
             </p>
             <code color="accent">Optional</code>&nbsp;<code color="accent"
               >Default: false</code
             >
-            <code color="accent">Pre-configurable</code>
           </td>
         </tr>
       </tbody>
@@ -143,9 +95,8 @@ init: EventEmitter;</pre
   <code color="accent">Module</code>
   <br />
   <p>
-    An Angular module which exports <code>*axLoadable</code> and
-    <code>*axLoadableDynamic</code> directives so it has to be imported in
-    other Angular modules which want to use these directives in the templates of
+    An Angular module which exports <code>ngx-loadable</code> component so it has to be imported in
+    other Angular modules which want to use this component in the templates of
     their components. Module can be also pre-configured using
     <code>forRoot()</code> and <code>forFeature()</code> static methods.
   </p>
@@ -237,10 +188,9 @@ init: EventEmitter;</pre
     <code>LoadableModuleRootOptions</code> into the
     <code>forRoot()</code> method of <code>LoadableModule</code>. These
     options will be applied to every element loaded using
-    <code>*axLoadable</code> or
-    <code>*axLoadableDynamic</code> directives. These options can be
+    <code>ngx-loadable</code> component. These options can be
     overridden by the element configuration in <code>forFeature()</code> and
-    lastly by the inline configuration of <code>*axLoadable</code> directive.
+    lastly by the inline configuration of <code>ngx-loadable</code> component.
   </p>
   <mat-card>
     <table>
@@ -253,10 +203,7 @@ init: EventEmitter;</pre
           <td><pre>loadingComponent: Type&#60;any></pre></td>
           <td>
             <p>
-              Component class to be displayed during element loading (similar to
-              <code>loadingTemplate</code> that can be specified inline in the
-              template, eg
-              <code>*axLoadable="url; loadingTemplate: loading;"</code>)
+              Component class to be displayed during element loading
             </p>
             <code color="accent">Optional</code>&nbsp;<code color="accent"
               >Default: undefined</code
@@ -268,10 +215,6 @@ init: EventEmitter;</pre
           <td>
             <p>
               Component class to be displayed after element loading failed
-              (similar to
-              <code>errorTemplate</code> that can be specified inline in the
-              template, eg
-              <code>*axLoadable="url; errorTemplate: error;"</code>)
             </p>
             <code color="accent">Optional</code>&nbsp;<code color="accent"
               >Default: undefined</code
@@ -346,8 +289,7 @@ init: EventEmitter;</pre
   <p>
     The element config used to pre-configure <code>LoadableModule</code> so
     that we do not have to specify url (and other supported options) inline
-    inside of the <code>*axLoadable</code> and
-    <code>*axLoadableDynamic</code> directives. The configs are matched to
+    inside of the <code>ngx-loadable</code> component. The configs are matched to
     particular elements by the tag. The elements are still loaded lazily even
     though they are preconfigured in the module during application startup...
   </p>
@@ -391,10 +333,7 @@ init: EventEmitter;</pre
           <td><pre>loadingComponent: Type&#60;any></pre></td>
           <td>
             <p>
-              Component class to be displayed during element loading (similar to
-              <code>loadingTemplate</code> that can be specified inline in the
-              template, eg
-              <code>*axLoadable="url; loadingTemplate: loading;"</code>)
+              Component class to be displayed during element loading
             </p>
             <code color="accent">Optional</code>&nbsp;<code color="accent"
               >Default: undefined</code
@@ -406,10 +345,6 @@ init: EventEmitter;</pre
           <td>
             <p>
               Component class to be displayed after element loading failed
-              (similar to
-              <code>errorTemplate</code> that can be specified inline in the
-              template, eg
-              <code>*axLoadable="url; errorTemplate: error;"</code>)
             </p>
             <code color="accent">Optional</code>&nbsp;<code color="accent"
               >Default: undefined</code

@@ -4,7 +4,19 @@
   <meta charset="utf-8">
   <title>Angular Loadable</title>
   <meta name="description" content="Simple Lazy Loading for Non Routable Angular Modules, Making Code Splitting your non routable Angular Modules, a piece of cake 🍰!"/>
-  <base href="/ngx-loadable/">
+  <base href="/ngx-loadable/">  <link
+      href="https://fonts.googleapis.com/css?family=Lato:900&amp;display=swap"
+      rel="stylesheet"
+  />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="apple-touch-icon" sizes="57x57" href="/ngx-loadable/assets/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="/ngx-loadable/assets/apple-icon-60x60.png">
@@ -24,13 +36,11 @@
   <meta name="msapplication-TileImage" content="/assets/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
   <link rel="icon" type="image/x-icon" href="/ngx-loadable/assets/favicon.ico">
-  <style>
-  .button,.buttons{align-items:center}.button,html{background-color:#fff}.button,a{cursor:pointer}.button,.tag:not(body){line-height:1.5;white-space:nowrap}.button,.card,.container,.notification{position:relative}.button{-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-moz-appearance:none;-webkit-appearance:none;border:1px solid #dbdbdb;border-radius:4px;box-shadow:none;display:inline-flex;font-size:1rem;height:2.25em;vertical-align:top;color:#363636;justify-content:center;padding-bottom:calc(.375em - 1px);padding-left:.75em;padding-right:.75em;padding-top:calc(.375em - 1px);text-align:center}.block:not(:last-child),.box:not(:last-child),.breadcrumb:not(:last-child),.content:not(:last-child),.highlight:not(:last-child),.level:not(:last-child),.list:not(:last-child),.message:not(:last-child),.notification:not(:last-child),.progress:not(:last-child),.subtitle:not(:last-child),.table-container:not(:last-child),.table:not(:last-child),.tabs:not(:last-child),.title:not(:last-child){margin-bottom:1.5rem}.button.is-large{font-size:1.5rem}.button:active,.button:focus{outline:0}blockquote,body,dd,dl,dt,fieldset,figure,h1,h2,h3,h4,h5,h6,hr,html,iframe,legend,li,ol,p,pre,textarea,ul{margin:0;padding:0}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:400}button,input,select,textarea{margin:0}html{box-sizing:border-box;font-size:16px;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;min-width:300px;overflow-x:hidden;overflow-y:scroll;text-rendering:optimizeLegibility;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;-ms-text-size-adjust:100%;text-size-adjust:100%}*,::after,::before{box-sizing:inherit}audio,img,video{height:auto;max-width:100%}article,aside,figure,footer,header,hgroup,section{display:block}body,button,input,select,textarea{font-family:BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif}body{color:#4a4a4a;font-size:1rem;font-weight:400;line-height:1.5}a{color:#3273dc;text-decoration:none}a:hover{color:#363636}span{font-style:inherit;font-weight:inherit}.is-size-3{font-size:2rem!important}.button.is-hovered,.button:hover{border-color:#b5b5b5;color:#363636}.button.is-focused,.button:focus{border-color:#3273dc;color:#363636}.button.is-focused:not(:active),.button:focus:not(:active){box-shadow:0 0 0 .125em rgba(50,115,220,.25)}.button.is-active,.button:active{border-color:#4a4a4a;color:#363636}.button.is-link,.button.is-link.is-hovered,.button.is-link:hover,.button.is-primary,.button.is-primary.is-active,.button.is-primary.is-focused,.button.is-primary:active,.button.is-primary:focus{border-color:transparent;color:#fff}.button.is-primary{background-color:#00d1b2}.button.is-primary.is-hovered,.button.is-primary:hover{background-color:#00c4a7;border-color:transparent;color:#fff}.button.is-primary.is-focused:not(:active),.button.is-primary:focus:not(:active){box-shadow:0 0 0 .125em rgba(0,209,178,.25)}.button.is-primary.is-active,.button.is-primary:active{background-color:#00b89c}.button.is-link{background-color:#3273dc}.button.is-link.is-hovered,.button.is-link:hover{background-color:#276cda}.buttons{display:flex;flex-wrap:wrap;justify-content:flex-start}.buttons .button{margin-bottom:.5rem}.buttons .button:not(:last-child):not(.is-fullwidth){margin-right:.5rem}.buttons:not(:last-child){margin-bottom:1rem}.container{margin:0 auto}@media screen and (min-width:1088px){.container{max-width:960px;width:960px}}@media screen and (min-width:1280px){.container{max-width:1152px;width:1152px}}.notification{background-color:#f5f5f5;border-radius:4px;padding:1.25rem 2.5rem 1.25rem 1.5rem}.notification.is-success{background-color:#23d160;color:#fff}.notification.is-warning{background-color:#ffdd57;color:rgba(0,0,0,.7)}.notification.is-danger{background-color:#ff3860;color:#fff}.tag:not(body){align-items:center;background-color:#f5f5f5;border-radius:4px;color:#4a4a4a;display:inline-flex;font-size:.75rem;height:2em;justify-content:center;padding-left:.75em;padding-right:.75em}.tag:not(body).is-success{background-color:#23d160;color:#fff}.tag:not(body).is-danger{background-color:#ff3860;color:#fff}.subtitle,.title{word-break:break-word}.title{color:#363636;font-size:2rem;font-weight:600;line-height:1.125}.title:not(.is-spaced)+.subtitle{margin-top:-1.25rem}.subtitle{color:#4a4a4a;font-size:1.25rem;font-weight:400;line-height:1.25}.card{background-color:#fff;box-shadow:0 2px 3px rgba(10,10,10,.1),0 0 0 1px rgba(10,10,10,.1);color:#4a4a4a;max-width:100%}.card-content,.card-header{background-color:transparent}.card-header{align-items:stretch;box-shadow:0 1px 2px rgba(10,10,10,.1);display:flex}.card-header-title{align-items:center;color:#363636;display:flex;flex-grow:1;font-weight:700;padding:.75rem}.card-content{padding:1.5rem}.hero-body,.section{padding:3rem 1.5rem}.hero-body{flex-grow:1;flex-shrink:0}.column{display:block;flex-basis:0;flex-grow:1;flex-shrink:1;padding:.75rem}.columns{margin-left:-.75rem;margin-right:-.75rem;margin-top:-.75rem}.columns:last-child{margin-bottom:-.75rem}@media screen and (min-width:769px),print{.columns{display:flex}}.hero.is-light{background-color:#f5f5f5;color:#363636}
-  </style>
-<link rel="stylesheet" href="styles.24913f1d1cb4f417ff30.css"></head>
-<body>
+
+<link rel="stylesheet" href="styles.c0336dace7214772b411.css"></head>
+<body class="mat-typography">
   <app-root></app-root>
   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-<script src="polyfills-es5.715db43f5267ec8cadbf.js" nomodule defer></script><script src="polyfills-es2015.ae65b00d9c3545485ff4.js" type="module"></script><script src="runtime-es2015.914a6d068006fe878545.js" type="module"></script><script src="main-es2015.1601720e4ba8969615e5.js" type="module"></script><script src="runtime-es5.914a6d068006fe878545.js" nomodule defer></script><script src="main-es5.1601720e4ba8969615e5.js" nomodule defer></script></body>
+<script src="polyfills-es5.e5b11b69ddcfc7769719.js" nomodule defer></script><script src="polyfills-es2015.161583978607fcb050d4.js" type="module"></script><script src="runtime-es2015.46507dc202b1140f26f3.js" type="module"></script><script src="main-es2015.467582a94b7f0e3e74af.js" type="module"></script><script src="runtime-es5.46507dc202b1140f26f3.js" nomodule defer></script><script src="main-es5.467582a94b7f0e3e74af.js" nomodule defer></script></body>
 </html>

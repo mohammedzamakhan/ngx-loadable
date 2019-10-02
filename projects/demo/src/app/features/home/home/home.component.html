@@ -51,21 +51,14 @@
 <h2>Quickstart</h2>
 <ol>
   <li>
-    Install <code color="accent">npm i ngx-loadable</code>
+    Install <code color="accent">ng add ngx-loadable</code>
   </li>
   <li>
-    Add
+    Add lazy loaded module
     <code>
-      import &#123; LoadableModule } from 'ngx-loadable';
-    </code>
-  </li>
-  <li>
-    Append <code>LoadableMoudule</code> to the <code>imports: []</code> of
-    your
-    <code>AppModule</code>
-  </li>
-  <li>
-    Create a component using <code>ng generate ngx-loadable:module lazy</code>
+      ng generate ngx-loadable:module lazy --module app
+    </code><br>
+    Optional flag <code>element</code> can be added to create it as a Angular Element
   </li>
   <li>
     Use <code>ngx-loadable</code> component to load the lazy component
