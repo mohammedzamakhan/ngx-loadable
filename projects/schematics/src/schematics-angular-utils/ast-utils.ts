@@ -275,6 +275,7 @@ export function addSymbolToNgModuleMetadata(
   metadataField: string,
   symbolName: string,
   importPath: string | null = null,
+  metadataFieldContent?: string
 ): Change[] {
   const nodes = getDecoratorMetadata(source, 'NgModule', '@angular/core');
   let node: any = nodes[0];  // tslint:disable-line:no-any
@@ -313,7 +314,7 @@ export function addSymbolToNgModuleMetadata(
     let toInsert: string;
     if (expr.properties.length === 0) {
       position = expr.getEnd() - 1;
-      toInsert = `  ${metadataField}: [${symbolName}]\n`;
+      toInsert = `  ${metadataField}: [${metadataFieldContent ? metadataFieldContent : symbolName}]\n`;
     } else {
       node = expr.properties[expr.properties.length - 1];
       position = node.getEnd();
@@ -321,9 +322,9 @@ export function addSymbolToNgModuleMetadata(
       const text = node.getFullText(source);
       const matches = text.match(/^\r?\n\s*/);
       if (matches.length > 0) {
-        toInsert = `,${matches[0]}${metadataField}: [${symbolName}]`;
+        toInsert = `,${matches[0]}${metadataField}: [${metadataFieldContent ? metadataFieldContent : symbolName}]`;
       } else {
-        toInsert = `, ${metadataField}: [${symbolName}]`;
+        toInsert = `, ${metadataField}: [${metadataFieldContent ? metadataFieldContent : symbolName}]`;
       }
     }
     if (importPath !== null) {
@@ -374,29 +375,29 @@ export function addSymbolToNgModuleMetadata(
     const expr = node as ts.ObjectLiteralExpression;
     if (expr.properties.length === 0) {
       position = expr.getEnd() - 1;
-      toInsert = `  ${metadataField}: [${symbolName}]\n`;
+      toInsert = `  ${metadataField}: [${metadataFieldContent ? metadataFieldContent : symbolName}]\n`;
     } else {
       node = expr.properties[expr.properties.length - 1];
       position = node.getEnd();
       // Get the indentation of the last element, if any.
       const text = node.getFullText(source);
       if (text.match('^\r?\r?\n')) {
-        toInsert = `,${text.match(/^\r?\n\s+/)[0]}${metadataField}: [${symbolName}]`;
+        toInsert = `,${text.match(/^\r?\n\s+/)[0]}${metadataField}: [${metadataFieldContent ? metadataFieldContent : symbolName}]`;
       } else {
-        toInsert = `, ${metadataField}: [${symbolName}]`;
+        toInsert = `, ${metadataField}: [${metadataFieldContent ? metadataFieldContent : symbolName}]`;
       }
     }
   } else if (node.kind === ts.SyntaxKind.ArrayLiteralExpression) {
     // We found the field but it's empty. Insert it just before the `]`.
     position--;
-    toInsert = `${symbolName}`;
+    toInsert = `${metadataFieldContent ? metadataFieldContent : symbolName}`;
   } else {
     // Get the indentation of the last element, if any.
     const text = node.getFullText(source);
     if (text.match(/^\r?\n/)) {
-      toInsert = `,${text.match(/^\r?\n(\r?)\s+/)[0]}${symbolName}`;
+      toInsert = `,${text.match(/^\r?\n(\r?)\s+/)[0]}${metadataFieldContent ? metadataFieldContent : symbolName}`;
     } else {
-      toInsert = `, ${symbolName}`;
+      toInsert = `, ${metadataFieldContent ? metadataFieldContent : symbolName}`;
     }
   }
   if (importPath !== null) {
@@ -425,9 +426,9 @@ export function addDeclarationToModule(source: ts.SourceFile,
  */
 export function addImportToModule(source: ts.SourceFile,
                                   modulePath: string, classifiedName: string,
-                                  importPath: string): Change[] {
+                                  importPath: string, metadataFieldContent?: string): Change[] {
 
-  return addSymbolToNgModuleMetadata(source, modulePath, 'imports', classifiedName, importPath);
+  return addSymbolToNgModuleMetadata(source, modulePath, 'imports', classifiedName, importPath, metadataFieldContent);
 }
 
 /**
