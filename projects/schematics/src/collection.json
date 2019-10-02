@@ -12,6 +12,11 @@
       "factory": "./module",
       "description": "Create an Angular module.",
       "schema": "./module/schema.json"
+    },
+    "ng-add": {
+      "factory": "./add-loadable/index",
+      "description": "Add ngx-loadable",
+      "schema": "./add-loadable/schema.json"
     }
   }
 }
