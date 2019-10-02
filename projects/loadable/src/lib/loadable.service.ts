@@ -30,6 +30,9 @@ export class LoadableService {
         );
       } else {
         this.modules.push(newModule);
+        if (newModule.preload) {
+          this.preload(newModule.name);
+        }
       }
     });
   }

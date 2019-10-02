@@ -1,0 +1,24 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "id": "SchematicsAngularModule",
+    "title": "Add Ngx Loadable options",
+    "type": "object",
+    "description": "Add ngx-loadable to project.",
+    "properties": {
+      "name": {
+        "type": "string",
+        "default": "Loadable"
+      },
+      "project": {
+        "type": "string",
+        "description": "The project to add ngx-loadable to."
+      },
+      "module": {
+        "type": "string",
+        "description": "The module file to add ngx-loadable to, should be relative to project source directory.",
+        "alias": "m",
+        "default": "app.module.ts"
+      }
+    }
+  }
+  
