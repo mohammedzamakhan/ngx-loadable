@@ -93,11 +93,11 @@ export class LoadableComponent implements OnChanges {
     this.loadFn();
   }
 
-  _renderTimeoutTemplate() {
+  _renderTimeoutTemplateOrComponent() {
     this.timedOut = true;
     const module = this.ls.getModule(this.module);
     this.ls._renderVCR(
-      this.timeoutTemplate || (module && module.timeoutTemplate) || (this.options && this.options.timeoutTemplate),
+      this.timeoutTemplate || (module && module.timeoutComponent) || (this.options && this.options.timeoutComponent),
       this.content
     );
   }
@@ -114,10 +114,10 @@ export class LoadableComponent implements OnChanges {
     );
 
     if (this.timeout === 0) {
-      this._renderTimeoutTemplate();
+      this._renderTimeoutTemplateOrComponent();
     } else if (this.timeout > 0) {
       setTimeout(() => {
-        this._renderTimeoutTemplate();
+        this._renderTimeoutTemplateOrComponent();
       }, this.timeout);
     }
 
