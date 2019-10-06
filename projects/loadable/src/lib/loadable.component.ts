@@ -93,7 +93,7 @@ export class LoadableComponent implements OnChanges {
     this.loadFn();
   }
 
-  _renderTimeoutTemplateOrComponent() {
+  _renderTimeout() {
     this.timedOut = true;
     const module = this.ls.getModule(this.module);
     this.ls._renderVCR(
@@ -114,10 +114,10 @@ export class LoadableComponent implements OnChanges {
     );
 
     if (this.timeout === 0) {
-      this._renderTimeoutTemplateOrComponent();
+      this._renderTimeout();
     } else if (this.timeout > 0) {
       setTimeout(() => {
-        this._renderTimeoutTemplateOrComponent();
+        this._renderTimeout();
       }, this.timeout);
     }
 
