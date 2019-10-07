@@ -1,12 +1,15 @@
 :host {
   padding: 20px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   align-items: center;
   text-align: center;
+  justify-content: space-between;
 
+  a {
+    width: auto;
+  }
   .signature {
-    flex: 1 0 auto;
-
     img {
       border-radius: 50%;
       height: 36px;
