@@ -12,8 +12,6 @@ There's a (tentative) [roadmap](project-roadmap) in which we've put down what we
 
 Since the project is constantly evolving and new features are requested/discovered as we go, this roadmap is open for discussions and we expect it to change over time.
 
-Roadmap-wise contributions via new issues are always welcomed.
-
 ### Discussion
 
 Have a question? Want to get in touch with the developers?
