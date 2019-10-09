@@ -7,10 +7,11 @@ import _ from 'lodash';
   styleUrls: ['./lazy.component.css']
 })
 export class LazyComponent {
+  @Input() input = 'Default Input';
+  @Output() output = new EventEmitter();
   constructor() { }
 
-  alert() {
-    alert('You clicked the button');
+  update() {
+      this.output.emit();
   }
-
 }
