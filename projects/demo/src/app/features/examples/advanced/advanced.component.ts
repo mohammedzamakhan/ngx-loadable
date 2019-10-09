@@ -1,6 +1,6 @@
 import { Component, OnInit, ComponentRef } from '@angular/core';
 import { LoadableService } from 'ngx-loadable';
-import { LazyComponent } from '../../../lazy/lazy.component';
+import { LazyExample7Component } from '../../../lazy-example-7/lazy-example-7.component';
 
 @Component({
   selector: 'demo-advanced',
@@ -50,13 +50,13 @@ export class AdvancedComponent implements OnInit {
     this.loadableService.preloadAll(['app-breach']).then(() => alert('preloaded breach module'));
   }
 
-  lazyInit({instance: lazyComponent}: ComponentRef<LazyComponent>) {
+  lazyInit({instance: lazyExample7Component}: ComponentRef<LazyExample7Component>) {
     let i = 0;
-    lazyComponent.input = 'Updated by AppComponent using Input';
+    lazyExample7Component.input = 'Updated by AppComponent using Input';
 
-    lazyComponent.output.subscribe(() => {
+    lazyExample7Component.output.subscribe(() => {
       i++;
-      lazyComponent.input = 'Updated by AppComponent using Output ' + i;
+      lazyExample7Component.input = 'Updated by AppComponent using Output ' + i;
     });
 }
 }
