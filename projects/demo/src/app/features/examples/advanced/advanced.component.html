@@ -147,4 +147,24 @@
       <pre [highlight]="codeExample6html"></pre>
     </div>
   </div>
+
+  <h2>
+    Passing Input and Outputs to loaded Component <code color="primary" *ngIf="lazyModule?.loaded">Loaded</code>
+  </h2>
+  <div class="content">
+    <div class="implementation">
+      <button mat-flat-button color="primary" (click)="example7 = true">
+        <mat-icon>play_arrow</mat-icon>
+        Show
+      </button>        
+    <ngx-loadable #lazyModule module="lazy" [show]="example7" (init)="lazyInit($event)"></ngx-loadable>
+    </div>
+    <div class="description">
+      <p>
+        Use <code>(init)</code> output to access that components inputs and outputs
+      </p>
+      <pre [highlight]="codeExample7html"></pre>
+      <pre [highlight]="codeExample7ts"></pre>    
+    </div>
+  </div>
 </div>
