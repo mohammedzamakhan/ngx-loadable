@@ -94,7 +94,7 @@ class YourComponent {
 ```
 ## Contribute
 
-Please contribute by creating issues/PRs
+[Contribution guidelines for this project](./CONTRIBUTING.md)
 
 ## License
 
