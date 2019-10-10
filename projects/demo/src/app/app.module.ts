@@ -50,6 +50,7 @@ import { ErrorComponent } from './shared/error/error.component';
       },
         { name: 'expansion', load: () => import('./expansion/expansion.module').then(m => m.ExpansionModule) },
         { name: 'lazy-test', load: () => import('./lazy-test/lazy-test.module').then(m => m.LazyTestModule) },
+        { name: 'lazy-example-7', load: () => import('./lazy-example-7/lazy-example-7.module').then(m => m.LazyExample7Module) },
         { name: 'app-element-test', load: () => import('./element-test/element-test.module').then(m => m.ElementTestModule), isElement: true }],
       rootOptions: {
         loadingComponent: LoaderComponent,

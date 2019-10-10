@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ComponentRef } from '@angular/core';
 import { LoadableService } from 'ngx-loadable';
+import { LazyExample7Component } from '../../../lazy-example-7/lazy-example-7.component';
 
 @Component({
   selector: 'demo-advanced',
@@ -13,6 +14,7 @@ export class AdvancedComponent implements OnInit {
   example3 = false;
   example4 = false;
   showBreach = false;
+  example7 = false;
 
   // example code examples
   codeExample1module = CODE_EXAMPLE_1_MODULE;
@@ -26,6 +28,8 @@ export class AdvancedComponent implements OnInit {
   codeExample5html = CODE_EXAMPLE_5_HTML;
   codeExample5ts = CODE_EXAMPLE_5_TS;
   codeExample6html = CODE_EXAMPLE_6_HTML;
+  codeExample7ts = CODE_EXAMPLE_7_TS;
+  codeExample7html = CODE_EXAMPLE_7_HTML;
 
   // example state
   counter = 0;
@@ -45,6 +49,16 @@ export class AdvancedComponent implements OnInit {
   preloadBreach() {
     this.loadableService.preloadAll(['app-breach']).then(() => alert('preloaded breach module'));
   }
+
+  lazyInit({instance: lazyExample7Component}: ComponentRef<LazyExample7Component>) {
+    let i = 0;
+    lazyExample7Component.input = 'Updated by AppComponent using Input';
+
+    lazyExample7Component.output.subscribe(() => {
+      i++;
+      lazyExample7Component.input = 'Updated by AppComponent using Output ' + i;
+    });
+}
 }
 
 const CODE_EXAMPLE_1_MODULE = `// pre-configured LoadableModule
@@ -165,4 +179,19 @@ class PageComponent {
 
 const CODE_EXAMPLE_6_HTML = `<button (mouseover)="breachModule.preload()" (click)="showBreach = true">Hover to load/ Click to show</button>
 <ngx-loadable #breachModule module="app-breach" [show]="showBreach"></ngx-loadable>
+`;
+
+const CODE_EXAMPLE_7_HTML = `<ngx-loadable #lazyModule module="lazy" [show]="true" (init)="lazyInit($event)"></ngx-loadable>
+`;
+
+const CODE_EXAMPLE_7_TS =
+`lazyInit({instance: lazyComponent}: ComponentRef<LazyComponent>) {
+    let i = 0;
+    lazyComponent.input = 'Updated by AppComponent using Input';
+
+    lazyComponent.output.subscribe(() => {
+      i++;
+      lazyComponent.input = 'Updated by AppComponent using Output ' + i;
+    });
+}
 `;
