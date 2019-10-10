@@ -1,5 +1,5 @@
 # ngx-loadable
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
 
 [![npm](https://badgen.net/npm/v/ngx-loadable)](https://www.npmjs.com/package/ngx-loadable) [![license](https://img.shields.io/github/license/mohammedzamakhan/ngx-loadable.svg)](https://github.com/mohammedzamakhan/ngx-loadable/master/LICENSE) [![size](https://badgen.net/bundlephobia/minzip/ngx-loadable)](https://bundlephobia.com/result?p=ngx-loadable)
 
@@ -112,6 +112,10 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://www.linkedin.com/in/mohammedzamakhan"><img src="https://avatars3.githubusercontent.com/u/2327532?v=4" width="100px;" alt="Zama Khan Mohammed"/><br /><sub><b>Zama Khan Mohammed</b></sub></a><br /><a href="https://github.com/mohammedzamakhan/ngx-loadable/commits?author=mohammedzamakhan" title="Code">💻</a> <a href="#design-mohammedzamakhan" title="Design">🎨</a> <a href="#example-mohammedzamakhan" title="Examples">💡</a> <a href="https://github.com/mohammedzamakhan/ngx-loadable/commits?author=mohammedzamakhan" title="Documentation">📖</a> <a href="#ideas-mohammedzamakhan" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-mohammedzamakhan" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
     <td align="center"><a href="https://github.com/rumanhassan"><img src="https://avatars2.githubusercontent.com/u/7890944?v=4" width="100px;" alt="rumanhassan"/><br /><sub><b>rumanhassan</b></sub></a><br /><a href="#ideas-rumanhassan" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/mohammedzamakhan/ngx-loadable/commits?author=rumanhassan" title="Code">💻</a> <a href="#tool-rumanhassan" title="Tools">🔧</a></td>
     <td align="center"><a href="https://github.com/aijazkhan81"><img src="https://avatars0.githubusercontent.com/u/6255674?v=4" width="100px;" alt="aijazkhan81"/><br /><sub><b>aijazkhan81</b></sub></a><br /><a href="#content-aijazkhan81" title="Content">🖋</a></td>
+    <td align="center"><a href="http://adityamenon.dev"><img src="https://avatars3.githubusercontent.com/u/27936970?v=4" width="100px;" alt="Aditya Menon"/><br /><sub><b>Aditya Menon</b></sub></a><br /><a href="https://github.com/mohammedzamakhan/ngx-loadable/commits?author=m-aditya" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://twitter.com/MrCube42"><img src="https://avatars1.githubusercontent.com/u/1512210?v=4" width="100px;" alt="David Würfel"/><br /><sub><b>David Würfel</b></sub></a><br /><a href="https://github.com/mohammedzamakhan/ngx-loadable/issues?q=author%3Adevinmotion" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/ReevMich"><img src="https://avatars3.githubusercontent.com/u/7333415?v=4" width="100px;" alt="Michael Reeves"/><br /><sub><b>Michael Reeves</b></sub></a><br /><a href="https://github.com/mohammedzamakhan/ngx-loadable/commits?author=ReevMich" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/siddharthpal"><img src="https://avatars2.githubusercontent.com/u/7220182?v=4" width="100px;" alt="siddharthpal"/><br /><sub><b>siddharthpal</b></sub></a><br /><a href="https://github.com/mohammedzamakhan/ngx-loadable/issues?q=author%3Asiddharthpal" title="Bug reports">🐛</a></td>
   </tr>
 </table>
 
