@@ -1,5 +1,5 @@
 import { NgModule, Inject, Optional, InjectionToken, ANALYZE_FOR_ENTRY_COMPONENTS } from '@angular/core';
-import { ModuleWithProviders } from '@angular/compiler/src/core';
+import { ModuleWithProviders } from '@angular/compiler';
 import { CommonModule } from '@angular/common';
 
 import { LoadableComponent } from './loadable.component';
