@@ -41,7 +41,7 @@
     "express": "^4.17.1",
     "highlight.js": "^9.15.10",
     "intersection-observer": "^0.7.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "moment": "^2.24.0",
     "ngx-highlightjs": "^3.0.3",
     "ngx-perimeter": "^0.0.1",
