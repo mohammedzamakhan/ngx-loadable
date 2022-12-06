@@ -38,7 +38,7 @@
     "core-js": "^3.1.4",
     "cpy-cli": "^2.0.0",
     "date-fns": "^2.0.0-alpha.27",
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "highlight.js": "^9.15.10",
     "intersection-observer": "^0.7.0",
     "lodash": "^4.17.15",
